@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Qyara — AI Chatbots Trained on Your Business Data</title>
+<title>Qyara.ai — AI Chatbots Trained on Your Business Data</title>
 <meta name="description" content="Deploy custom AI chatbots trained on your PDFs, FAQs, and documents in under 45 minutes. Reduce support tickets by 70%. No coding required."/>
-<meta property="og:title" content="Qyara — AI Chatbots Trained on Your Business Data"/>
+<meta property="og:title" content="Qyara.ai — AI Chatbots Trained on Your Business Data"/>
 <meta property="og:description" content="Deploy intelligent AI chatbots that learn from your documents in 45 minutes."/>
 <meta property="og:url" content="https://qyara.ai"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='url(%23g)'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%230F4FE8'/><stop offset='100%25' stop-color='%2300C8FF'/></linearGradient></defs><circle cx='14' cy='14' r='7' stroke='white' stroke-width='3' fill='none'/><line x1='19' y1='19' x2='26' y2='26' stroke='white' stroke-width='3' stroke-linecap='round'/></svg>"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -44,9 +45,22 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--black);color:var(--
 /* NAV */
 #nav{position:fixed;top:0;left:0;right:0;z-index:999;transition:all .4s}
 #nav.scrolled{background:rgba(4,6,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:1320px;margin:0 auto;padding:1.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.05em;background:linear-gradient(135deg,#fff 0%,var(--blue3) 50%,var(--red3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:flex;align-items:center;gap:.6rem;text-decoration:none}
-.logo-q{width:36px;height:36px;background:linear-gradient(135deg,var(--blue),var(--red));border-radius:10px;display:grid;place-items:center;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#fff;letter-spacing:0;box-shadow:0 0 24px rgba(30,95,255,.5),0 0 48px rgba(230,57,70,.2);flex-shrink:0;-webkit-text-fill-color:#fff}
+.nav-inner{max-width:1320px;margin:0 auto;padding:1rem 2.5rem;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+.nav-logo svg{height:38px;width:auto}
+/* Logo icon box */
+.logo-icon-box{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#0F4FE8,#00C8FF);display:grid;place-items:center;flex-shrink:0;box-shadow:0 0 22px rgba(15,79,232,.55),0 0 44px rgba(0,200,255,.15)}
+/* Logo wordmark */
+.logo-word{display:flex;align-items:baseline;gap:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.55rem;letter-spacing:-.02em;margin-left:.55rem}
+.logo-word .lw-q{color:#fff}
+.logo-word .lw-yara{color:#fff}
+.logo-word .lw-dot{color:var(--red2)}
+.logo-word .lw-ai{color:var(--red2)}
+/* Chat bubble pair */
+.logo-bubbles{display:flex;align-items:flex-start;gap:3px;margin-left:.5rem;position:relative;top:2px}
+.lb1{width:22px;height:15px;border-radius:5px 5px 5px 1px;background:var(--blue);display:flex;align-items:center;justify-content:center;gap:2px}
+.lb2{width:17px;height:12px;border-radius:5px 5px 1px 5px;background:var(--red);display:flex;align-items:center;justify-content:center;gap:2px;margin-top:2px}
+.lb-dot{width:2.5px;height:2.5px;border-radius:50%;background:rgba(255,255,255,.9)}
 .nav-links{display:flex;list-style:none;gap:2.5rem}
 .nav-links a{color:var(--gray);font-size:.88rem;font-weight:500;text-decoration:none;transition:color .2s;letter-spacing:.02em}
 .nav-links a:hover{color:var(--white)}
@@ -69,6 +83,9 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--black);color:var(--
 .mob-menu.open{display:flex}
 .mob-menu a{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:.05em;color:var(--white);text-decoration:none;transition:color .2s}
 .mob-menu a:hover{color:var(--blue3)}
+/* Mobile menu logo */
+.mob-logo{display:flex;align-items:center;margin-bottom:1rem}
+.mob-logo .logo-word{font-size:2.2rem}
 .mob-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:var(--gray);font-size:1.8rem;cursor:pointer}
 
 /* SHARED */
@@ -299,7 +316,8 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--black);color:var(--
 /* ═══ FOOTER ═══ */
 footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:rgba(4,6,15,.5)}
 .foot-g{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem}
-.foot-brand p{color:var(--gray);font-size:.86rem;line-height:1.72;margin:1rem 0 1.4rem;max-width:270px}
+.foot-brand .nav-logo{display:inline-flex;align-items:center}
+.foot-brand p{color:var(--gray);font-size:.86rem;line-height:1.72;margin:.2rem 0 1.4rem;max-width:270px}
 .socials{display:flex;gap:.7rem}
 .soc{width:34px;height:34px;border-radius:8px;background:var(--card);border:1px solid var(--border);display:grid;place-items:center;color:var(--gray);text-decoration:none;transition:all .2s;font-size:.8rem}
 .soc:hover{color:var(--white);border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.07)}
@@ -344,6 +362,18 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:rgba(4,
 
 <div class="mob-menu" id="mobMenu">
   <button class="mob-close" id="mobClose">✕</button>
+  <div class="mob-logo">
+    <div class="logo-icon-box" style="width:48px;height:48px;border-radius:13px">
+      <svg width="28" height="28" viewBox="0 0 22 22" fill="none">
+        <circle cx="10" cy="10" r="7" stroke="white" stroke-width="2.5" fill="none" opacity=".95"/>
+        <line x1="15" y1="15" x2="21" y2="21" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity=".95"/>
+        <circle cx="10" cy="10" r="2" fill="white" opacity=".4"/>
+      </svg>
+    </div>
+    <div class="logo-word" style="font-size:2.2rem;margin-left:.7rem">
+      <span class="lw-q">Q</span><span class="lw-yara">yara</span><span class="lw-dot">.</span><span class="lw-ai">ai</span>
+    </div>
+  </div>
   <a href="#features" onclick="closeMob()">Features</a>
   <a href="#how" onclick="closeMob()">How It Works</a>
   <a href="#pricing" onclick="closeMob()">Pricing</a>
@@ -354,7 +384,22 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:rgba(4,
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="#" class="nav-logo"><div class="logo-q">Q</div>QYARA</a>
+    <a href="#" class="nav-logo">
+      <div class="logo-icon-box">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="10" r="7" stroke="white" stroke-width="2.5" fill="none" opacity=".95"/>
+          <line x1="15" y1="15" x2="21" y2="21" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity=".95"/>
+          <circle cx="10" cy="10" r="2" fill="white" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="logo-word">
+        <span class="lw-q">Q</span><span class="lw-yara">yara</span><span class="lw-dot">.</span><span class="lw-ai">ai</span>
+      </div>
+      <div class="logo-bubbles">
+        <div class="lb1"><div class="lb-dot"></div><div class="lb-dot"></div><div class="lb-dot"></div></div>
+        <div class="lb2"><div class="lb-dot"></div><div class="lb-dot"></div></div>
+      </div>
+    </a>
     <ul class="nav-links">
       <li><a href="#features">Features</a></li>
       <li><a href="#how">How It Works</a></li>
@@ -376,6 +421,26 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:rgba(4,
   <div class="hero-grid"></div>
   <div class="hero-content">
     <div class="hero-left">
+      <!-- HERO BRAND STAMP -->
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.75rem;animation:up .9s ease 0s both">
+        <div class="logo-icon-box" style="width:52px;height:52px;border-radius:14px">
+          <svg width="30" height="30" viewBox="0 0 22 22" fill="none">
+            <circle cx="10" cy="10" r="7" stroke="white" stroke-width="2.5" fill="none" opacity=".95"/>
+            <line x1="15" y1="15" x2="21" y2="21" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity=".95"/>
+            <circle cx="10" cy="10" r="2" fill="white" opacity=".4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="logo-word" style="font-size:2rem;margin-left:0">
+            <span class="lw-q">Q</span><span class="lw-yara">yara</span><span class="lw-dot">.</span><span class="lw-ai">ai</span>
+          </div>
+          <div style="font-size:.7rem;color:var(--gray2);letter-spacing:.18em;text-transform:uppercase;margin-top:.1rem">AI Chatbot Platform</div>
+        </div>
+        <div class="logo-bubbles" style="margin-left:.25rem">
+          <div class="lb1" style="width:26px;height:18px;border-radius:6px 6px 6px 1px"><div class="lb-dot"></div><div class="lb-dot"></div><div class="lb-dot"></div></div>
+          <div class="lb2" style="width:20px;height:14px;border-radius:6px 6px 1px 6px"><div class="lb-dot"></div><div class="lb-dot"></div></div>
+        </div>
+      </div>
       <div class="hero-eyebrow"><span class="eyebrow-dot"></span>Now with GPT-4o + Claude 3.5 Sonnet</div>
       <h1 class="hero-h1">
         <span class="grad-mix">SMART AI</span><br>
@@ -538,7 +603,12 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:rgba(4,
         <div class="cw-outer">
           <div class="cw-bar">
             <div class="cw-dots"><span class="cd1"></span><span class="cd2"></span><span class="cd3"></span></div>
-            <span class="cw-title">QYARA ASSISTANT</span>
+            <span class="cw-title" style="display:flex;align-items:center;gap:.35rem">
+              <span style="width:16px;height:16px;border-radius:5px;background:linear-gradient(135deg,#0F4FE8,#00C8FF);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg width="10" height="10" viewBox="0 0 22 22" fill="none"><circle cx="10" cy="10" r="7" stroke="white" stroke-width="3" fill="none"/><line x1="15" y1="15" x2="21" y2="21" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
+              </span>
+              <span style="font-weight:700;letter-spacing:.03em">Qyara<span style="color:#ff4757">.ai</span></span>
+            </span>
             <span class="cw-live">Live</span>
           </div>
           <div class="cw-msgs" id="cwMsgs">
@@ -849,7 +919,22 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:rgba(4,
   <div class="container">
     <div class="foot-g">
       <div class="foot-brand">
-        <a href="#" class="nav-logo" style="display:inline-flex;margin-bottom:.75rem"><div class="logo-q">Q</div>QYARA</a>
+        <a href="#" class="nav-logo" style="margin-bottom:.9rem">
+          <div class="logo-icon-box" style="width:36px;height:36px;border-radius:9px">
+            <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
+              <circle cx="10" cy="10" r="7" stroke="white" stroke-width="2.5" fill="none" opacity=".95"/>
+              <line x1="15" y1="15" x2="21" y2="21" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity=".95"/>
+              <circle cx="10" cy="10" r="2" fill="white" opacity=".4"/>
+            </svg>
+          </div>
+          <div class="logo-word" style="font-size:1.4rem">
+            <span class="lw-q">Q</span><span class="lw-yara">yara</span><span class="lw-dot">.</span><span class="lw-ai">ai</span>
+          </div>
+          <div class="logo-bubbles">
+            <div class="lb1"><div class="lb-dot"></div><div class="lb-dot"></div><div class="lb-dot"></div></div>
+            <div class="lb2"><div class="lb-dot"></div><div class="lb-dot"></div></div>
+          </div>
+        </a>
         <p>AI chatbots trained exclusively on your business data. Deploy in 45 minutes. No code. Zero hallucinations.</p>
         <div class="socials">
           <a href="#" class="soc" aria-label="Twitter">𝕏</a>
