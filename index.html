@@ -1210,6 +1210,31 @@ function tFaq(btn){const item=btn.parentElement;const was=item.classList.contain
 /* SMOOTH SCROLL */
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
 </script>
+
+<!-- Floating chat widget -->
+
+<!-- <iframe
+  id="dsi-africa-widget-frame"
+  src="http://localhost:8000/widget/widget-embed.html"
+  title="DS-I Africa Grant Navigator"
+  style="position:fixed; bottom:0; right:0; width:100px; height:100px; border:none; z-index:999999; background:transparent; transition:width .25s, height .25s;"
+></iframe>
+<script>
+(function () {
+  var frame = document.getElementById('dsi-africa-widget-frame');
+  var expectedOrigin = new URL(frame.src).origin;
+  var CLOSED = { width: '100px', height: '100px' };
+  var OPEN   = { width: '400px', height: '650px' };
+  window.addEventListener('message', function (event) {
+    if (event.origin !== expectedOrigin) return;
+    var data = event.data;
+    if (!data || data.source !== 'dsi-africa-widget' || data.type !== 'dsi-widget-state') return;
+    frame.style.width = (data.open ? OPEN : CLOSED).width;
+    frame.style.height = (data.open ? OPEN : CLOSED).height;
+  });
+})();
+</script> -->
+
 <script>
   window.chatWidgetConfig = {
     chatWidgetFrontendUrl: "http://187.127.158.1:9007",
@@ -1217,5 +1242,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click'
   };
 </script>
 <script src="http://187.127.158.1:9007/embed.js"></script>
+
 </body>
 </html>
