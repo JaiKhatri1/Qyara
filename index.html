@@ -1210,5 +1210,12 @@ function tFaq(btn){const item=btn.parentElement;const was=item.classList.contain
 /* SMOOTH SCROLL */
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
 </script>
+<script>
+  window.chatWidgetConfig = {
+    chatWidgetFrontendUrl: "http://187.127.158.1:9007",
+    chatWidgetBackendBaseUrl: "http://187.127.158.1:9008/api",
+  };
+</script>
+<script src="http://187.127.158.1:9007/embed.js"></script>
 </body>
 </html>
