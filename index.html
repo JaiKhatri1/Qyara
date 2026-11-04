@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" prefix="og: https://ogp.me/ns#">
+<html lang="en" data-lang="en" prefix="og: https://ogp.me/ns#">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<script>
+(function () {
+  var KEY = 'qyara-lang';
+  var lang = null;
+  var m = /[?&]lang=(it|en)\b/i.exec(location.search);
+  if (m) {
+    lang = m[1].toLowerCase();
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+  }
+  if (!lang) {
+    try { lang = localStorage.getItem(KEY); } catch (e) {}
+    if (lang !== 'it' && lang !== 'en') lang = null;
+  }
+  if (!lang) {
+    var prefs = navigator.languages || [navigator.language || ''];
+    for (var i = 0; i < prefs.length; i++) {
+      var p = String(prefs[i]).toLowerCase();
+      if (p === 'it' || p.indexOf('it-') === 0) { lang = 'it'; break; }
+    }
+  }
+  lang = lang || 'en';
+  document.documentElement.setAttribute('data-lang', lang);
+  document.documentElement.lang = lang;
+})();
+</script>
+
 
 <!-- NUCLEAR SEO — QYARA.SITE — Target: qyara, qyara ai, qyara chatbot, qyara site -->
-<title>Qyara — AI Chatbot Platform | Qyara.ai | Train AI on Your Business Data</title>
+<title>Qyara — White-Label AI Chatbot Platform | Text &amp; Voice</title>
 <meta name="description" content="Qyara is a white-label AI chatbot platform. Train it on your own content once and it answers customers by text or voice on your website, WhatsApp or a shareable chat link. Admin console, CRM integrations and three subscription tiers."/>
 <meta name="keywords" content="Qyara, Qyara AI, Qyara chatbot, Qyara site, Qyara.ai, Qyara.site, Qyara AI chatbot, Qyara customer support, Qyara knowledge base, Qyara platform, AI chatbot for business, custom AI chatbot, no-code chatbot, knowledge base chatbot, business chatbot AI, document trained chatbot, customer support automation AI, white label chatbot, chatbot platform 2025"/>
 <meta name="author" content="Qyara"/>
@@ -22,7 +48,7 @@
 <!-- ═══ OPEN GRAPH ═══ -->
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Qyara"/>
-<meta property="og:title" content="Qyara — AI Chatbots Trained on Your Business Data"/>
+<meta property="og:title" content="Qyara — AI Chatbots Trained on Your Business Content"/>
 <meta property="og:description" content="White-label AI chatbot platform: train it on your content once, answer customers by text or voice on your website, WhatsApp or a chat link."/>
 <meta property="og:url" content="https://qyara.site/"/>
 <meta property="og:image" content="https://qyara.site/og-image.png"/>
@@ -31,6 +57,7 @@
 <meta property="og:image:height" content="630"/>
 <meta property="og:image:alt" content="Qyara AI Chatbot Platform"/>
 <meta property="og:locale" content="en_US"/>
+<meta property="og:locale:alternate" content="it_IT"/>
 
 <!-- ═══ TWITTER CARD ═══ -->
 <meta name="twitter:card" content="summary_large_image"/>
@@ -101,6 +128,17 @@
   --glow-blue:rgba(30,95,255,0.4);
   --glow-red:rgba(230,57,70,0.35);
 }
+/* LANGUAGE SWITCH */
+:root[data-lang="en"] [data-it]{display:none}
+:root[data-lang="it"] [data-en]{display:none}
+.lang-switch{display:flex;align-items:center;gap:.25rem;font-size:.8125rem;color:var(--gray)}
+.lang-switch button{font:inherit;color:inherit;background:none;border:0;padding:.25rem .4rem;cursor:pointer;opacity:.55;border-radius:4px}
+.lang-switch button:hover{opacity:.85}
+.lang-switch button:focus-visible{outline:2px solid currentColor;outline-offset:1px}
+:root[data-lang="it"] .lang-switch [data-set-lang="it"],:root[data-lang="en"] .lang-switch [data-set-lang="en"]{opacity:1;font-weight:700;color:var(--white)}
+.mob-lang{font-size:1rem}
+.nav-right .lang-switch{margin-right:.5rem}
+@media(max-width:480px){.nav-right .lang-switch{display:none}}
 html{scroll-behavior:smooth}
 .skip-link:focus{left:0!important}
 body{font-family:'Space Grotesk',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -453,22 +491,27 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
 </style>
 </head>
 <body>
-<a href="#hero" class="skip-link" style="position:absolute;left:-9999px;top:0;background:var(--blue);color:#fff;padding:.5rem 1rem;z-index:9999;border-radius:0 0 8px 0;font-weight:700;font-size:.9rem">Skip to main content</a>
+<a href="#hero" class="skip-link" style="position:absolute;left:-9999px;top:0;background:var(--blue);color:#fff;padding:.5rem 1rem;z-index:9999;border-radius:0 0 8px 0;font-weight:700;font-size:.9rem"><span data-en>Skip to main content</span><span data-it>Vai al contenuto principale</span></a>
 <canvas id="particles"></canvas>
 
 <div class="mob-menu" id="mobMenu">
-  <button class="mob-close" id="mobClose" aria-label="Close navigation menu">✕</button>
+  <button class="mob-close" id="mobClose" aria-label="Close navigation menu" data-it-aria-label="Chiudi il menu di navigazione">✕</button>
   <div class="mob-logo">
     <img src="android-chrome-512x512.png" alt="Qyara" class="logo-img-mob" width="40" height="40" loading="lazy"/>
     <div class="logo-word" style="font-size:2.2rem;margin-left:.7rem">
       <span class="lw-q">Q</span><span class="lw-yara">yara</span><span class="lw-dot">.</span><span class="lw-ai">ai</span>
     </div>
   </div>
-  <a href="#features" onclick="closeMob()">Features</a>
-  <a href="#how" onclick="closeMob()">How It Works</a>
-  <a href="#pricing" onclick="closeMob()">Pricing</a>
+  <div class="lang-switch mob-lang" role="group" aria-label="Language / Lingua">
+        <button type="button" data-set-lang="it" lang="it">IT</button>
+        <span aria-hidden="true">·</span>
+        <button type="button" data-set-lang="en" lang="en">EN</button>
+      </div>
+  <a href="#features" onclick="closeMob()"><span data-en>Features</span><span data-it>Funzionalità</span></a>
+  <a href="#how" onclick="closeMob()"><span data-en>How It Works</span><span data-it>Come funziona</span></a>
+  <a href="#pricing" onclick="closeMob()"><span data-en>Pricing</span><span data-it>Prezzi</span></a>
   <a href="#faq" onclick="closeMob()">FAQ</a>
-  <a href="#final" onclick="closeMob()" style="color:var(--red2)">Get Started →</a>
+  <a href="#final" onclick="closeMob()" style="color:var(--red2)"><span data-en>Get Started →</span><span data-it>Inizia ora →</span></a>
 </div>
 
 <!-- NAV -->
@@ -485,17 +528,22 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
       </div>
     </a>
     <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
-      <li><a href="#admin">Admin Portal</a></li>
-      <li><a href="#how">How It Works</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#features"><span data-en>Features</span><span data-it>Funzionalità</span></a></li>
+      <li><a href="#admin"><span data-en>Admin Portal</span><span data-it>Portale di amministrazione</span></a></li>
+      <li><a href="#how"><span data-en>How It Works</span><span data-it>Come funziona</span></a></li>
+      <li><a href="#pricing"><span data-en>Pricing</span><span data-it>Prezzi</span></a></li>
+      <li data-en><a href="#testimonials">Reviews</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <div class="nav-right">
-      <a href="#" class="btn btn-ghost">Sign In</a>
-      <a href="#final" class="btn btn-blue">Get Started →</a>
-      <button class="hamburger" id="ham" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobMenu"><span></span><span></span><span></span></button>
+      <div class="lang-switch" role="group" aria-label="Language / Lingua">
+        <button type="button" data-set-lang="it" lang="it">IT</button>
+        <span aria-hidden="true">·</span>
+        <button type="button" data-set-lang="en" lang="en">EN</button>
+      </div>
+      <a href="#" class="btn btn-ghost"><span data-en>Sign In</span><span data-it>Accedi</span></a>
+      <a href="#final" class="btn btn-blue"><span data-en>Get Started →</span><span data-it>Inizia ora →</span></a>
+      <button class="hamburger" id="ham" aria-label="Open navigation menu" data-it-aria-label="Apri il menu di navigazione" aria-expanded="false" aria-controls="mobMenu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
@@ -513,25 +561,25 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
           <div class="logo-word" style="font-size:1.35rem;margin-left:0">
             <span class="lw-q">Q</span><span class="lw-yara">yara</span><span class="lw-dot">.</span><span class="lw-ai">ai</span>
           </div>
-          <div style="font-size:.65rem;color:var(--gray2);letter-spacing:.16em;text-transform:uppercase;margin-top:.05rem">AI Chatbot Platform</div>
+          <div style="font-size:.65rem;color:var(--gray2);letter-spacing:.16em;text-transform:uppercase;margin-top:.05rem"><span data-en>AI Chatbot Platform</span><span data-it>Piattaforma chatbot AI</span></div>
         </div>
       </div>
-      <div class="hero-eyebrow"><span class="eyebrow-dot"></span>Text chat &amp; ElevenLabs voice calls — one widget</div>
+      <div class="hero-eyebrow"><span class="eyebrow-dot"></span><span data-en>Text chat &amp; ElevenLabs voice calls — one widget</span><span data-it>Chat testuale e chiamate vocali ElevenLabs — in un unico widget</span></div>
       <h1 class="hero-h1">
-        <span class="grad-mix">SMART AI</span><br>
-        <span class="grad-blue">CHATBOTS</span><br>
-        <span class="line2">FOR YOUR BUSINESS</span>
+        <span class="grad-mix"><span data-en>SMART AI</span><span data-it>AI INTELLIGENTE</span></span><br>
+        <span class="grad-blue"><span data-en>CHATBOTS</span><span data-it>CHATBOT</span></span><br>
+        <span class="line2"><span data-en>FOR YOUR BUSINESS</span><span data-it>PER LA SUA ATTIVITÀ</span></span>
       </h1>
-      <p class="hero-p">Train Qyara on your own content once — website, files, Notion, Google Drive, Calendly — and it answers customers by <strong>text or voice</strong> on your website, <strong>WhatsApp</strong>, or a shareable chat link.</p>
+      <p class="hero-p"><span data-en>Train Qyara on your own content once — website, files, Notion, Google Drive, Calendly — and it answers customers by</span><span data-it>Addestri Qyara una sola volta sui Suoi contenuti — sito web, file, Notion, Google Drive, Calendly — e risponderà ai clienti</span> <strong><span data-en>text or voice</span><span data-it>via testo o voce</span></strong> <span data-en>on your website,</span><span data-it>sul Suo sito, su</span> <strong>WhatsApp</strong><span data-en>, or a shareable chat link.</span><span data-it>, oppure tramite un link di chat condivisibile.</span></p>
       <div class="hero-btns">
-        <button onclick="openForm('Demo Request')" class="btn btn-red">Request a Demo</button>
-        <a href="#how" class="btn btn-outline-w">See How It Works ↓</a>
+        <button onclick="openForm('Demo Request')" class="btn btn-red"><span data-en>Request a Demo</span><span data-it>Richieda una demo</span></button>
+        <a href="#how" class="btn btn-outline-w"><span data-en>See How It Works ↓</span><span data-it>Scopra come funziona ↓</span></a>
       </div>
       <div class="hero-stats">
-        <div class="h-stat"><div class="h-stat-num">TEXT</div><div class="h-stat-label">+ Voice Calls</div></div>
-        <div class="h-stat"><div class="h-stat-num">3</div><div class="h-stat-label">Deploy Channels</div></div>
-        <div class="h-stat"><div class="h-stat-num">CRM</div><div class="h-stat-label">Lead Sync</div></div>
-        <div class="h-stat"><div class="h-stat-num">24/7</div><div class="h-stat-label">Always On</div></div>
+        <div class="h-stat"><div class="h-stat-num"><span data-en>TEXT</span><span data-it>TESTO</span></div><div class="h-stat-label"><span data-en>+ Voice Calls</span><span data-it>+ chiamate vocali</span></div></div>
+        <div class="h-stat"><div class="h-stat-num">3</div><div class="h-stat-label"><span data-en>Deploy Channels</span><span data-it>Canali di pubblicazione</span></div></div>
+        <div class="h-stat"><div class="h-stat-num">CRM</div><div class="h-stat-label"><span data-en>Lead Sync</span><span data-it>Sincronizzazione lead</span></div></div>
+        <div class="h-stat"><div class="h-stat-num">24/7</div><div class="h-stat-label"><span data-en>Always On</span><span data-it>Sempre attivo</span></div></div>
       </div>
     </div>
 
@@ -682,24 +730,24 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
               <img src="android-chrome-512x512.png" alt="Q" style="width:18px;height:18px;border-radius:5px;object-fit:cover;flex-shrink:0" width="18" height="18" loading="lazy"/>
               <span style="font-weight:700;letter-spacing:.03em">Qyara<span style="color:#ff4757">.ai</span></span>
             </span>
-            <span class="cw-live">Live</span>
+            <span class="cw-live"><span data-en>Live</span><span data-it>In linea</span></span>
           </div>
-          <div class="cw-msgs" id="cwMsgs" aria-live="polite" aria-label="Chat conversation">
+          <div class="cw-msgs" id="cwMsgs" aria-live="polite" aria-label="Chat conversation" data-it-aria-label="Conversazione in chat">
             <div class="cw-msg bot" style="animation-delay:.5s">
               <div class="cw-av bot">Q</div>
-              <div class="cw-bub">Hey! 👋 I'm trained on your business docs. Ask me anything!</div>
+              <div class="cw-bub"><span data-en>Hey! 👋 I'm trained on your business docs. Ask me anything!</span><span data-it>Buongiorno! 👋 Sono addestrato sui documenti della Sua attività. Mi chieda pure!</span></div>
             </div>
             <div class="cw-msg user" style="animation-delay:1.4s">
               <div class="cw-av user">U</div>
-              <div class="cw-bub">What's your refund policy?</div>
+              <div class="cw-bub"><span data-en>What's your refund policy?</span><span data-it>Qual è la vostra politica di rimborso?</span></div>
             </div>
             <div class="cw-msg bot" style="animation-delay:2.3s">
               <div class="cw-av bot">Q</div>
-              <div class="cw-bub">Based on your policy docs — full refund within 30 days, no questions asked. Want the full details?</div>
+              <div class="cw-bub"><span data-en>Based on your policy docs — full refund within 30 days, no questions asked. Want the full details?</span><span data-it>In base ai Suoi documenti — rimborso completo entro 30 giorni, senza domande. Desidera i dettagli?</span></div>
             </div>
             <div class="cw-msg user" style="animation-delay:3.4s">
               <div class="cw-av user">U</div>
-              <div class="cw-bub">Do you have enterprise?</div>
+              <div class="cw-bub"><span data-en>Do you have enterprise?</span><span data-it>Avete un piano enterprise?</span></div>
             </div>
             <div class="cw-msg bot" id="typBot" style="display:none">
               <div class="cw-av bot">Q</div>
@@ -707,11 +755,11 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
             </div>
             <div class="cw-msg bot" id="lastBot" style="display:none">
               <div class="cw-av bot">Q</div>
-              <div class="cw-bub">Yes! Enterprise adds voice calls, WhatsApp campaigns and the highest usage limits. Want to book a call? 🚀</div>
+              <div class="cw-bub"><span data-en>Yes! Enterprise adds voice calls, WhatsApp campaigns and the highest usage limits. Want to book a call? 🚀</span><span data-it>Sì! Enterprise aggiunge chiamate vocali, campagne WhatsApp e i limiti di utilizzo più alti. Desidera prenotare una chiamata? 🚀</span></div>
             </div>
           </div>
           <div class="cw-inp">
-            <input type="text" placeholder="Ask about your business…" readonly/>
+            <input type="text" placeholder="Ask about your business…" data-it-placeholder="Chieda qualcosa sulla Sua attività…" readonly/>
             <button class="send">↑</button>
           </div>
         </div>
@@ -721,7 +769,7 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
 </section>
 
 <!-- TRUST BAR -->
-<section id="trust">
+<section id="trust" data-en>
   <div class="container">
     <p class="trust-lbl rv">Built for businesses that want AI as a full channel</p>
     <div class="trust-row rv">
@@ -739,10 +787,10 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
 <section id="stats">
   <div class="container">
     <div class="stats-g">
-      <div class="sc rv"><div class="sn">TEXT + VOICE</div><div class="sl">One widget — customers pick Start Chat or Start Call</div></div>
-      <div class="sc rv d1"><div class="sn">3 CHANNELS</div><div class="sl">Website embed, shareable link and WhatsApp</div></div>
-      <div class="sc rv d2"><div class="sn">3 PLANS</div><div class="sl">Starter, Professional and Enterprise on one platform</div></div>
-      <div class="sc rv d3"><div class="sn">3 ROLES</div><div class="sl">Staff, Admin and SystemAdmin team access</div></div>
+      <div class="sc rv"><div class="sn"><span data-en>TEXT + VOICE</span><span data-it>TESTO + VOCE</span></div><div class="sl"><span data-en>One widget — customers pick Start Chat or Start Call</span><span data-it>Un solo widget — il cliente sceglie «Avvia chat» o «Avvia chiamata»</span></div></div>
+      <div class="sc rv d1"><div class="sn"><span data-en>3 CHANNELS</span><span data-it>3 CANALI</span></div><div class="sl"><span data-en>Website embed, shareable link and WhatsApp</span><span data-it>Sito web, link condivisibile e WhatsApp</span></div></div>
+      <div class="sc rv d2"><div class="sn"><span data-en>3 PLANS</span><span data-it>3 PIANI</span></div><div class="sl"><span data-en>Starter, Professional and Enterprise on one platform</span><span data-it>Starter, Professional ed Enterprise su un'unica piattaforma</span></div></div>
+      <div class="sc rv d3"><div class="sn"><span data-en>3 ROLES</span><span data-it>3 RUOLI</span></div><div class="sl"><span data-en>Staff, Admin and SystemAdmin team access</span><span data-it>Accessi del team: Staff, Admin e SystemAdmin</span></div></div>
     </div>
   </div>
 </section>
@@ -751,42 +799,42 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
 <section id="features">
   <div class="container">
     <div class="text-center" style="margin-bottom:3.5rem">
-      <div class="section-pill rv">Platform Features</div>
-      <h2 class="section-h rv">ONE PLATFORM. <span class="grad-blue">TEXT &amp; VOICE.</span><br><span class="grad-red">EVERY CHANNEL.</span></h2>
+      <div class="section-pill rv"><span data-en>Platform Features</span><span data-it>Funzionalità della piattaforma</span></div>
+      <h2 class="section-h rv"><span data-en>ONE PLATFORM.</span><span data-it>UNA PIATTAFORMA.</span> <span class="grad-blue"><span data-en>TEXT &amp; VOICE.</span><span data-it>TESTO E VOCE.</span></span><br><span class="grad-red"><span data-en>EVERY CHANNEL.</span><span data-it>OGNI CANALE.</span></span></h2>
       <div class="red-line rv"></div>
-      <p class="section-sub rv">Qyara is a white-label AI chatbot platform: train it on your own content once, and it answers customers anywhere you deploy it — your website, WhatsApp, or a shareable chat link.</p>
+      <p class="section-sub rv"><span data-en>Qyara is a white-label AI chatbot platform: train it on your own content once, and it answers customers anywhere you deploy it — your website, WhatsApp, or a shareable chat link.</span><span data-it>Qyara è una piattaforma di chatbot AI in white label: la addestri una sola volta sui Suoi contenuti e risponderà ai clienti ovunque la pubblichi — sul Suo sito, su WhatsApp o tramite un link di chat condivisibile.</span></p>
     </div>
     <div class="feat-g">
       <div class="fc fbig rv">
         <div class="fi blue">🧠</div>
-        <h3>Knowledge Base — Trained on YOUR Content</h3>
-        <p>Scrape a page or crawl every in-scope link on a site, upload documents, add Q&amp;A by hand, or pull from Notion, Google Drive and Calendly. An Enhance Knowledge pass re-runs AI processing over ingested content to improve answer quality.</p>
-        <a href="#how" class="flink">See how training works →</a>
+        <h3><span data-en>Knowledge Base — Trained on YOUR Content</span><span data-it>Base di conoscenza — addestrata sui SUOI contenuti</span></h3>
+        <p><span data-en>Scrape a page or crawl every in-scope link on a site, upload documents, add Q&amp;A by hand, or pull from Notion, Google Drive and Calendly. An Enhance Knowledge pass re-runs AI processing over ingested content to improve answer quality.</span><span data-it>Acquisisca una pagina o scansioni ogni link pertinente di un sito, carichi documenti, aggiunga domande e risposte a mano oppure importi da Notion, Google Drive e Calendly. Con «Enhance Knowledge» l'AI rielabora i contenuti acquisiti per migliorare la qualità delle risposte.</span></p>
+        <a href="#how" class="flink"><span data-en>See how training works →</span><span data-it>Scopra come funziona l'addestramento →</span></a>
       </div>
       <div class="fc rv d1">
         <div class="fi red">🎙️</div>
-        <h3>Text Chat or Voice Call</h3>
-        <p>Customers pick Start Chat or Start Call in the same widget. Voice is a real conversational AI call powered by ElevenLabs, not a script.</p>
+        <h3><span data-en>Text Chat or Voice Call</span><span data-it>Chat testuale o chiamata vocale</span></h3>
+        <p><span data-en>Customers pick Start Chat or Start Call in the same widget. Voice is a real conversational AI call powered by ElevenLabs, not a script.</span><span data-it>Nello stesso widget il cliente sceglie «Avvia chat» o «Avvia chiamata». La voce è una vera chiamata conversazionale con AI, basata su ElevenLabs, non un copione.</span></p>
       </div>
       <div class="fc rv d2">
         <div class="fi blue">🛒</div>
-        <h3>Dynamic Catalog</h3>
-        <p>Structured product and listing data the bot can search and recommend from — not just free-text knowledge.</p>
+        <h3><span data-en>Dynamic Catalog</span><span data-it>Catalogo dinamico</span></h3>
+        <p><span data-en>Structured product and listing data the bot can search and recommend from — not just free-text knowledge.</span><span data-it>Dati strutturati di prodotti e schede in cui il bot può cercare e da cui può consigliare — non solo conoscenza in testo libero.</span></p>
       </div>
       <div class="fc rv">
         <div class="fi red">📣</div>
-        <h3>Outbound Campaigns</h3>
-        <p>Run outbound call and WhatsApp campaigns from the console, not just inbound chat.</p>
+        <h3><span data-en>Outbound Campaigns</span><span data-it>Campagne in uscita</span></h3>
+        <p><span data-en>Run outbound call and WhatsApp campaigns from the console, not just inbound chat.</span><span data-it>Avvii dalla console campagne di chiamate e WhatsApp in uscita, non solo chat in entrata.</span></p>
       </div>
       <div class="fc rv d1">
         <div class="fi blue">🌍</div>
-        <h3>Multilingual</h3>
-        <p>Answers in the customer's language. Up to 3 languages on Professional, all languages on Enterprise.</p>
+        <h3><span data-en>Multilingual</span><span data-it>Multilingue</span></h3>
+        <p><span data-en>Answers in the customer's language. Up to 3 languages on Professional, all languages on Enterprise.</span><span data-it>Risponde nella lingua del cliente. Fino a 3 lingue con Professional, tutte le lingue con Enterprise.</span></p>
       </div>
       <div class="fc rv d2">
         <div class="fi red">🎨</div>
-        <h3>White-Label &amp; Customizable</h3>
-        <p>Match the widget's colors and branding to your site, with branding and deployment settings managed in the console.</p>
+        <h3><span data-en>White-Label &amp; Customizable</span><span data-it>White label e personalizzabile</span></h3>
+        <p><span data-en>Match the widget's colors and branding to your site, with branding and deployment settings managed in the console.</span><span data-it>Adatti colori e stile del widget al Suo sito, con impostazioni di marchio e pubblicazione gestite dalla console.</span></p>
       </div>
     </div>
   </div>
@@ -796,24 +844,24 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
 <section id="admin">
   <div class="container">
     <div class="text-center" style="margin-bottom:3.5rem">
-      <div class="section-pill rv">Admin Portal</div>
-      <h2 class="section-h rv">THE <span class="grad-blue">CONTROL ROOM</span> FOR<br>YOUR <span class="grad-red">WHOLE BOT</span></h2>
+      <div class="section-pill rv"><span data-en>Admin Portal</span><span data-it>Portale di amministrazione</span></div>
+      <h2 class="section-h rv"><span data-en>THE</span><span data-it>LA</span> <span class="grad-blue"><span data-en>CONTROL ROOM</span><span data-it>SALA DI CONTROLLO</span></span> <span data-en>FOR</span><span data-it>PER</span><br><span data-en>YOUR</span><span data-it>TUTTO IL</span> <span class="grad-red"><span data-en>WHOLE BOT</span><span data-it>SUO BOT</span></span></h2>
       <div class="red-line rv"></div>
-      <p class="section-sub rv">Everything your team uses to build, watch and run the bot.</p>
+      <p class="section-sub rv"><span data-en>Everything your team uses to build, watch and run the bot.</span><span data-it>Tutto ciò che il Suo team usa per creare, controllare e gestire il bot.</span></p>
     </div>
     <div class="adm-g">
-      <div class="ac rv"><h3>📊 Dashboard</h3><p>At-a-glance view of activity across the deployment.</p></div>
-      <div class="ac rv d1"><h3>🌐 Website Upload</h3><p>Point it at a URL to scrape that page, or turn Crawl on to ingest every in-scope link automatically.</p></div>
-      <div class="ac rv d2"><h3>📄 Upload Files</h3><p>Train the bot directly from your documents.</p></div>
-      <div class="ac rv"><h3>✍️ Manual Entry</h3><p>Add Q&amp;A or facts by hand for anything not captured elsewhere.</p></div>
-      <div class="ac rv d1"><h3>✨ Enhance Knowledge</h3><p>Re-run AI processing over ingested content to improve answer quality.</p></div>
-      <div class="ac rv d2"><h3>🔌 Notion · Drive · Calendly</h3><p>Pull in content and scheduling data directly from these tools.</p></div>
-      <div class="ac rv"><h3>🛍️ Dynamic Catalog</h3><p>Structured product and listing data the bot can search and recommend from.</p></div>
-      <div class="ac rv d1"><h3>💬 Chat Sessions</h3><p>Review live and past conversations the bot has had.</p></div>
-      <div class="ac rv d2"><h3>👥 Users &amp; Roles</h3><p>Team access with three tiers — Staff, Admin and SystemAdmin — each seeing only what they're cleared for.</p></div>
-      <div class="ac rv"><h3>📧 Support Email Queries</h3><p>Centralizes support questions that arrive by email.</p></div>
-      <div class="ac rv d1"><h3>🧪 Playground</h3><p>Test the bot's answers privately before it's live for customers.</p></div>
-      <div class="ac rv d2"><h3>⚙️ Settings</h3><p>Branding, configuration and deployment settings.</p></div>
+      <div class="ac rv"><h3><span data-en>📊 Dashboard</span><span data-it>📊 Dashboard</span></h3><p><span data-en>At-a-glance view of activity across the deployment.</span><span data-it>Una visione d'insieme dell'attività su tutta l'installazione.</span></p></div>
+      <div class="ac rv d1"><h3><span data-en>🌐 Website Upload</span><span data-it>🌐 Caricamento da sito web</span></h3><p><span data-en>Point it at a URL to scrape that page, or turn Crawl on to ingest every in-scope link automatically.</span><span data-it>Indichi un URL per acquisire quella pagina, oppure attivi la scansione per importare automaticamente ogni link pertinente.</span></p></div>
+      <div class="ac rv d2"><h3><span data-en>📄 Upload Files</span><span data-it>📄 Caricamento file</span></h3><p><span data-en>Train the bot directly from your documents.</span><span data-it>Addestri il bot direttamente dai Suoi documenti.</span></p></div>
+      <div class="ac rv"><h3><span data-en>✍️ Manual Entry</span><span data-it>✍️ Inserimento manuale</span></h3><p><span data-en>Add Q&amp;A or facts by hand for anything not captured elsewhere.</span><span data-it>Aggiunga a mano domande, risposte o informazioni non presenti altrove.</span></p></div>
+      <div class="ac rv d1"><h3><span data-en>✨ Enhance Knowledge</span><span data-it>✨ Enhance Knowledge</span></h3><p><span data-en>Re-run AI processing over ingested content to improve answer quality.</span><span data-it>Rielabori con l'AI i contenuti acquisiti per migliorare la qualità delle risposte.</span></p></div>
+      <div class="ac rv d2"><h3><span data-en>🔌 Notion · Drive · Calendly</span><span data-it>🔌 Notion · Drive · Calendly</span></h3><p><span data-en>Pull in content and scheduling data directly from these tools.</span><span data-it>Importi contenuti e dati di prenotazione direttamente da questi strumenti.</span></p></div>
+      <div class="ac rv"><h3><span data-en>🛍️ Dynamic Catalog</span><span data-it>🛍️ Catalogo dinamico</span></h3><p><span data-en>Structured product and listing data the bot can search and recommend from.</span><span data-it>Dati strutturati di prodotti e schede in cui il bot può cercare e da cui può consigliare.</span></p></div>
+      <div class="ac rv d1"><h3><span data-en>💬 Chat Sessions</span><span data-it>💬 Sessioni di chat</span></h3><p><span data-en>Review live and past conversations the bot has had.</span><span data-it>Consulti le conversazioni in corso e passate del bot.</span></p></div>
+      <div class="ac rv d2"><h3><span data-en>👥 Users &amp; Roles</span><span data-it>👥 Utenti e ruoli</span></h3><p><span data-en>Team access with three tiers — Staff, Admin and SystemAdmin — each seeing only what they're cleared for.</span><span data-it>Accesso del team su tre livelli — Staff, Admin e SystemAdmin — ciascuno vede solo ciò per cui è autorizzato.</span></p></div>
+      <div class="ac rv"><h3><span data-en>📧 Support Email Queries</span><span data-it>📧 Richieste di supporto via email</span></h3><p><span data-en>Centralizes support questions that arrive by email.</span><span data-it>Raccoglie in un unico posto le richieste di supporto che arrivano via email.</span></p></div>
+      <div class="ac rv d1"><h3><span data-en>🧪 Playground</span><span data-it>🧪 Playground</span></h3><p><span data-en>Test the bot's answers privately before it's live for customers.</span><span data-it>Provi le risposte del bot in privato prima che sia online per i clienti.</span></p></div>
+      <div class="ac rv d2"><h3><span data-en>⚙️ Settings</span><span data-it>⚙️ Impostazioni</span></h3><p><span data-en>Branding, configuration and deployment settings.</span><span data-it>Impostazioni di marchio, configurazione e pubblicazione.</span></p></div>
     </div>
   </div>
 </section>
@@ -822,18 +870,18 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
 <section id="widget">
   <div class="container">
     <div class="text-center" style="margin-bottom:3.5rem">
-      <div class="section-pill rv">Chat Widget</div>
-      <h2 class="section-h rv">WHAT YOUR CUSTOMERS <span class="grad-red">ACTUALLY SEE</span></h2>
+      <div class="section-pill rv"><span data-en>Chat Widget</span><span data-it>Widget di chat</span></div>
+      <h2 class="section-h rv"><span data-en>WHAT YOUR CUSTOMERS</span><span data-it>COSA VEDONO</span> <span class="grad-red"><span data-en>ACTUALLY SEE</span><span data-it>DAVVERO I SUOI CLIENTI</span></span></h2>
       <div class="red-line rv"></div>
-      <p class="section-sub rv">An embeddable widget, not a plain chatbox.</p>
+      <p class="section-sub rv"><span data-en>An embeddable widget, not a plain chatbox.</span><span data-it>Un widget integrabile, non una semplice finestra di chat.</span></p>
     </div>
     <div class="adm-g">
-      <div class="ac rv"><h3>💬 Chat or Call</h3><p>Customers choose "Start Chat" or "Start Call" — voice is a real conversational AI call powered by ElevenLabs.</p></div>
-      <div class="ac rv d1"><h3>🧲 Lead Capture First</h3><p>Name, phone and email are collected before the conversation starts, so every chat is already a lead.</p></div>
-      <div class="ac rv d2"><h3>🌍 Multilingual</h3><p>Answers in the customer's language; the number of languages depends on plan.</p></div>
-      <div class="ac rv"><h3>🎨 Your Branding</h3><p>Colors and branding matched to your site (Professional and Enterprise).</p></div>
-      <div class="ac rv d1"><h3>🚀 Deploy Your Way</h3><p>Embed on a website, share a standalone link, or go live over WhatsApp, depending on plan.</p></div>
-      <div class="ac rv d2"><h3>🙋 Human Escalation</h3><p>Hands off to a real agent when the bot can't help (Professional and Enterprise).</p></div>
+      <div class="ac rv"><h3><span data-en>💬 Chat or Call</span><span data-it>💬 Chat o chiamata</span></h3><p><span data-en>Customers choose "Start Chat" or "Start Call" — voice is a real conversational AI call powered by ElevenLabs.</span><span data-it>Il cliente sceglie «Avvia chat» o «Avvia chiamata» — la voce è una vera chiamata conversazionale con AI, basata su ElevenLabs.</span></p></div>
+      <div class="ac rv d1"><h3><span data-en>🧲 Lead Capture First</span><span data-it>🧲 Prima i contatti</span></h3><p><span data-en>Name, phone and email are collected before the conversation starts, so every chat is already a lead.</span><span data-it>Nome, telefono ed email vengono raccolti prima dell'inizio della conversazione, così ogni chat è già un contatto commerciale.</span></p></div>
+      <div class="ac rv d2"><h3><span data-en>🌍 Multilingual</span><span data-it>🌍 Multilingue</span></h3><p><span data-en>Answers in the customer's language; the number of languages depends on plan.</span><span data-it>Risponde nella lingua del cliente; il numero di lingue dipende dal piano.</span></p></div>
+      <div class="ac rv"><h3><span data-en>🎨 Your Branding</span><span data-it>🎨 Il Suo marchio</span></h3><p><span data-en>Colors and branding matched to your site (Professional and Enterprise).</span><span data-it>Colori e stile adattati al Suo sito (Professional ed Enterprise).</span></p></div>
+      <div class="ac rv d1"><h3><span data-en>🚀 Deploy Your Way</span><span data-it>🚀 Pubblichi come preferisce</span></h3><p><span data-en>Embed on a website, share a standalone link, or go live over WhatsApp, depending on plan.</span><span data-it>Lo integri in un sito web, condivida un link autonomo o lo attivi su WhatsApp, a seconda del piano.</span></p></div>
+      <div class="ac rv d2"><h3><span data-en>🙋 Human Escalation</span><span data-it>🙋 Passaggio a un operatore</span></h3><p><span data-en>Hands off to a real agent when the bot can't help (Professional and Enterprise).</span><span data-it>Passa la conversazione a una persona quando il bot non può aiutare (Professional ed Enterprise).</span></p></div>
     </div>
   </div>
 </section>
@@ -842,18 +890,18 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
 <section id="integrations">
   <div class="container">
     <div class="text-center" style="margin-bottom:3.5rem">
-      <div class="section-pill rv">Integrations</div>
-      <h2 class="section-h rv">PLUGS INTO THE TOOLS <span class="grad-blue">YOU ALREADY USE</span></h2>
+      <div class="section-pill rv"><span data-en>Integrations</span><span data-it>Integrazioni</span></div>
+      <h2 class="section-h rv"><span data-en>PLUGS INTO THE TOOLS</span><span data-it>SI COLLEGA AGLI STRUMENTI</span> <span class="grad-blue"><span data-en>YOU ALREADY USE</span><span data-it>CHE GIÀ UTILIZZA</span></span></h2>
       <div class="red-line rv"></div>
-      <p class="section-sub rv">No re-entering data — Qyara connects to where your content, leads and customers already live.</p>
+      <p class="section-sub rv"><span data-en>No re-entering data — Qyara connects to where your content, leads and customers already live.</span><span data-it>Nessun dato da reinserire — Qyara si collega a dove si trovano già i Suoi contenuti, i contatti e i clienti.</span></p>
     </div>
     <div class="adm-g">
-      <div class="ac rv"><h3>📚 Google Drive · Notion · Calendly</h3><p>Pull knowledge and scheduling data straight in.</p></div>
-      <div class="ac rv d1"><h3>🤝 Salesforce · HubSpot</h3><p>Leads captured by the bot land where your sales team already works.</p></div>
-      <div class="ac rv d2"><h3>🌐 Website Auto-Training</h3><p>Point it at a URL and it trains itself from the live site, with an option to crawl every linked page.</p></div>
-      <div class="ac rv"><h3>📱 WhatsApp &amp; Twilio</h3><p>Outbound call and WhatsApp campaigns, plus widget call support.</p></div>
-      <div class="ac rv d1"><h3>✉️ SMTP Email</h3><p>Support email queries flow into the same console.</p></div>
-      <div class="ac rv d2"><h3>🔊 ElevenLabs Voice</h3><p>Powers the conversational AI voice calls in the widget.</p></div>
+      <div class="ac rv"><h3><span data-en>📚 Google Drive · Notion · Calendly</span><span data-it>📚 Google Drive · Notion · Calendly</span></h3><p><span data-en>Pull knowledge and scheduling data straight in.</span><span data-it>Importi direttamente conoscenza e dati di prenotazione.</span></p></div>
+      <div class="ac rv d1"><h3><span data-en>🤝 Salesforce · HubSpot</span><span data-it>🤝 Salesforce · HubSpot</span></h3><p><span data-en>Leads captured by the bot land where your sales team already works.</span><span data-it>I contatti raccolti dal bot arrivano dove il Suo team commerciale già lavora.</span></p></div>
+      <div class="ac rv d2"><h3><span data-en>🌐 Website Auto-Training</span><span data-it>🌐 Addestramento automatico dal sito</span></h3><p><span data-en>Point it at a URL and it trains itself from the live site, with an option to crawl every linked page.</span><span data-it>Indichi un URL e si addestra da solo sul sito online, con la possibilità di scansionare ogni pagina collegata.</span></p></div>
+      <div class="ac rv"><h3><span data-en>📱 WhatsApp &amp; Twilio</span><span data-it>📱 WhatsApp e Twilio</span></h3><p><span data-en>Outbound call and WhatsApp campaigns, plus widget call support.</span><span data-it>Campagne di chiamate e WhatsApp in uscita, più il supporto alle chiamate dal widget.</span></p></div>
+      <div class="ac rv d1"><h3><span data-en>✉️ SMTP Email</span><span data-it>✉️ Email SMTP</span></h3><p><span data-en>Support email queries flow into the same console.</span><span data-it>Le richieste di supporto via email confluiscono nella stessa console.</span></p></div>
+      <div class="ac rv d2"><h3><span data-en>🔊 ElevenLabs Voice</span><span data-it>🔊 Voce ElevenLabs</span></h3><p><span data-en>Powers the conversational AI voice calls in the widget.</span><span data-it>Alimenta le chiamate vocali conversazionali con AI nel widget.</span></p></div>
     </div>
   </div>
 </section>
@@ -862,47 +910,47 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
 <section id="how">
   <div class="container">
     <div class="text-center" style="margin-bottom:4rem">
-      <div class="section-pill rv">Simple Setup</div>
-      <h2 class="section-h rv">FROM ZERO TO <span class="grad-blue">LIVE</span><br>IN <span class="grad-red">4 STEPS</span></h2>
+      <div class="section-pill rv"><span data-en>Simple Setup</span><span data-it>Configurazione semplice</span></div>
+      <h2 class="section-h rv"><span data-en>FROM ZERO TO</span><span data-it>DA ZERO A</span> <span class="grad-blue"><span data-en>LIVE</span><span data-it>ONLINE</span></span><br><span data-en>IN</span><span data-it>IN</span> <span class="grad-red"><span data-en>4 STEPS</span><span data-it>4 PASSI</span></span></h2>
       <div class="red-line rv"></div>
     </div>
     <div class="how-g">
       <div class="how-steps">
-        <div class="hs active" onclick="setStep(this,0)"><div class="hn">01</div><div><h3>Train It on Your Content</h3><p>Point Qyara at a URL (with Crawl to follow every in-scope link), upload files, add Q&amp;A by hand, or pull from Notion, Google Drive and Calendly.</p></div></div>
-        <div class="hs" onclick="setStep(this,1)"><div class="hn">02</div><div><h3>Enhance &amp; Test Privately</h3><p>Re-run AI processing to improve answer quality, then try the bot in the Playground before it's live for customers.</p></div></div>
-        <div class="hs" onclick="setStep(this,2)"><div class="hn">03</div><div><h3>Brand &amp; Configure</h3><p>Match the widget to your site, set languages, lead capture and escalation, and give your team Staff, Admin or SystemAdmin access.</p></div></div>
-        <div class="hs" onclick="setStep(this,3)"><div class="hn">04</div><div><h3>Deploy Anywhere &amp; Watch It Work</h3><p>Embed on your website, share a chat link, or go live on WhatsApp — then review every conversation in Chat Sessions.</p></div></div>
+        <div class="hs active" onclick="setStep(this,0)"><div class="hn">01</div><div><h3><span data-en>Train It on Your Content</span><span data-it>Lo addestri sui Suoi contenuti</span></h3><p><span data-en>Point Qyara at a URL (with Crawl to follow every in-scope link), upload files, add Q&amp;A by hand, or pull from Notion, Google Drive and Calendly.</span><span data-it>Indichi a Qyara un URL (con la scansione per seguire ogni link pertinente), carichi file, aggiunga domande e risposte a mano oppure importi da Notion, Google Drive e Calendly.</span></p></div></div>
+        <div class="hs" onclick="setStep(this,1)"><div class="hn">02</div><div><h3><span data-en>Enhance &amp; Test Privately</span><span data-it>Lo migliori e lo provi in privato</span></h3><p><span data-en>Re-run AI processing to improve answer quality, then try the bot in the Playground before it's live for customers.</span><span data-it>Rielabori i contenuti con l'AI per migliorare le risposte, poi provi il bot nel Playground prima che sia online per i clienti.</span></p></div></div>
+        <div class="hs" onclick="setStep(this,2)"><div class="hn">03</div><div><h3><span data-en>Brand &amp; Configure</span><span data-it>Personalizzi e configuri</span></h3><p><span data-en>Match the widget to your site, set languages, lead capture and escalation, and give your team Staff, Admin or SystemAdmin access.</span><span data-it>Adatti il widget al Suo sito, imposti lingue, raccolta contatti e passaggio a un operatore, e assegni al team l'accesso Staff, Admin o SystemAdmin.</span></p></div></div>
+        <div class="hs" onclick="setStep(this,3)"><div class="hn">04</div><div><h3><span data-en>Deploy Anywhere &amp; Watch It Work</span><span data-it>Lo pubblichi ovunque e lo osservi al lavoro</span></h3><p><span data-en>Embed on your website, share a chat link, or go live on WhatsApp — then review every conversation in Chat Sessions.</span><span data-it>Lo integri nel Suo sito, condivida un link di chat o lo attivi su WhatsApp — poi consulti ogni conversazione in Sessioni di chat.</span></p></div></div>
       </div>
       <div class="how-vis rv">
         <div class="vt">
-          <button class="vt-btn on" onclick="setVTab(this,'up')">📤 Upload</button>
-          <button class="vt-btn" onclick="setVTab(this,'tr')">🤖 Training</button>
-          <button class="vt-btn" onclick="setVTab(this,'cu')">🎨 Customize</button>
+          <button class="vt-btn on" onclick="setVTab(this,'up')"><span data-en>📤 Upload</span><span data-it>📤 Carica</span></button>
+          <button class="vt-btn" onclick="setVTab(this,'tr')"><span data-en>🤖 Training</span><span data-it>🤖 Addestramento</span></button>
+          <button class="vt-btn" onclick="setVTab(this,'cu')"><span data-en>🎨 Customize</span><span data-it>🎨 Personalizza</span></button>
         </div>
         <div class="vb">
           <div id="vup">
-            <div class="dz"><div class="dz-ico">📂</div><h4>Drop your files here</h4><p>PDF, DOCX, TXT, CSV, URLs supported</p></div>
+            <div class="dz"><div class="dz-ico">📂</div><h4><span data-en>Drop your files here</span><span data-it>Trascini qui i Suoi file</span></h4><p><span data-en>PDF, DOCX, TXT, CSV, URLs supported</span><span data-it>Supportati PDF, DOCX, TXT, CSV e URL</span></p></div>
             <div class="fitem">📄 <span class="fn">company-policies.pdf</span><span class="fs">2.4 MB</span><span class="fok">✓</span></div>
             <div class="fitem">📋 <span class="fn">faq-guide.docx</span><span class="fs">840 KB</span><span class="fok">✓</span></div>
             <div class="fitem">🌐 <span class="fn">yoursite.com/help</span><span class="fs">URL</span><span class="fok">✓</span></div>
             <div class="pbar"><div class="pfill" id="pf" style="width:0%"></div></div>
-            <p style="font-size:.74rem;color:var(--gray);margin-top:.5rem;text-align:right" id="pl">Training… 0%</p>
+            <p style="font-size:.74rem;color:var(--gray);margin-top:.5rem;text-align:right" id="pl"><span data-en>Training… 0%</span><span data-it>Addestramento… 0%</span></p>
           </div>
           <div id="vtr" style="display:none;text-align:center;padding:1.5rem 0">
             <div style="font-size:2.5rem;margin-bottom:.8rem">🧠</div>
-            <h4 style="font-size:.9rem;margin-bottom:.4rem">Processing your knowledge</h4>
-            <p style="font-size:.76rem;color:var(--gray);margin-bottom:1.2rem">Chunking, embedding, indexing…</p>
+            <h4 style="font-size:.9rem;margin-bottom:.4rem"><span data-en>Processing your knowledge</span><span data-it>Elaborazione dei Suoi contenuti</span></h4>
+            <p style="font-size:.76rem;color:var(--gray);margin-bottom:1.2rem"><span data-en>Chunking, embedding, indexing…</span><span data-it>Suddivisione, embedding, indicizzazione…</span></p>
             <div class="pbar"><div class="pfill" style="width:73%;background:linear-gradient(90deg,var(--blue),var(--red))"></div></div>
-            <p style="font-size:.73rem;color:var(--gray);margin-top:.5rem">73% — Indexing FAQ guide</p>
+            <p style="font-size:.73rem;color:var(--gray);margin-top:.5rem"><span data-en>73% — Indexing FAQ guide</span><span data-it>73% — Indicizzazione della guida FAQ</span></p>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1.2rem">
-              <div style="background:rgba(30,95,255,.07);border:1px solid rgba(30,95,255,.14);border-radius:9px;padding:.7rem;text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--blue2)">2,847</div><div style="font-size:.7rem;color:var(--gray)">Chunks indexed</div></div>
-              <div style="background:rgba(230,57,70,.07);border:1px solid rgba(230,57,70,.14);border-radius:9px;padding:.7rem;text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--red2)">3</div><div style="font-size:.7rem;color:var(--gray)">Documents trained</div></div>
+              <div style="background:rgba(30,95,255,.07);border:1px solid rgba(30,95,255,.14);border-radius:9px;padding:.7rem;text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--blue2)">2,847</div><div style="font-size:.7rem;color:var(--gray)"><span data-en>Chunks indexed</span><span data-it>Frammenti indicizzati</span></div></div>
+              <div style="background:rgba(230,57,70,.07);border:1px solid rgba(230,57,70,.14);border-radius:9px;padding:.7rem;text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--red2)">3</div><div style="font-size:.7rem;color:var(--gray)"><span data-en>Documents trained</span><span data-it>Documenti elaborati</span></div></div>
             </div>
           </div>
           <div id="vcu" style="display:none;flex-direction:column;gap:.85rem">
-            <div style="display:flex;flex-direction:column;gap:.5rem"><label style="font-size:.7rem;color:var(--gray);font-weight:700;letter-spacing:.06em;text-transform:uppercase">Bot Name</label><div style="background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:.55rem .9rem;font-size:.84rem">Aria Support Agent</div></div>
-            <div style="display:flex;flex-direction:column;gap:.5rem"><label style="font-size:.7rem;color:var(--gray);font-weight:700;letter-spacing:.06em;text-transform:uppercase">Personality</label><div style="display:flex;gap:.45rem;flex-wrap:wrap"><span style="background:rgba(30,95,255,.14);border:1px solid rgba(30,95,255,.28);color:var(--blue2);font-size:.72rem;padding:.28rem .7rem;border-radius:100px">Friendly ✓</span><span style="background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--gray);font-size:.72rem;padding:.28rem .7rem;border-radius:100px">Professional</span><span style="background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--gray);font-size:.72rem;padding:.28rem .7rem;border-radius:100px">Concise</span></div></div>
-            <div style="display:flex;flex-direction:column;gap:.5rem"><label style="font-size:.7rem;color:var(--gray);font-weight:700;letter-spacing:.06em;text-transform:uppercase">Brand Color</label><div style="display:flex;gap:.5rem"><span style="width:26px;height:26px;border-radius:50%;background:var(--blue);border:2px solid white;cursor:pointer;display:inline-block"></span><span style="width:26px;height:26px;border-radius:50%;background:var(--red);cursor:pointer;display:inline-block"></span><span style="width:26px;height:26px;border-radius:50%;background:#7c3aed;cursor:pointer;display:inline-block"></span><span style="width:26px;height:26px;border-radius:50%;background:#f59e0b;cursor:pointer;display:inline-block"></span></div></div>
+            <div style="display:flex;flex-direction:column;gap:.5rem"><label style="font-size:.7rem;color:var(--gray);font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span data-en>Bot Name</span><span data-it>Nome del bot</span></label><div style="background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:.55rem .9rem;font-size:.84rem"><span data-en>Aria Support Agent</span><span data-it>Aria, assistente clienti</span></div></div>
+            <div style="display:flex;flex-direction:column;gap:.5rem"><label style="font-size:.7rem;color:var(--gray);font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span data-en>Personality</span><span data-it>Personalità</span></label><div style="display:flex;gap:.45rem;flex-wrap:wrap"><span style="background:rgba(30,95,255,.14);border:1px solid rgba(30,95,255,.28);color:var(--blue2);font-size:.72rem;padding:.28rem .7rem;border-radius:100px"><span data-en>Friendly ✓</span><span data-it>Cordiale ✓</span></span><span style="background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--gray);font-size:.72rem;padding:.28rem .7rem;border-radius:100px">Professional</span><span style="background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--gray);font-size:.72rem;padding:.28rem .7rem;border-radius:100px"><span data-en>Concise</span><span data-it>Conciso</span></span></div></div>
+            <div style="display:flex;flex-direction:column;gap:.5rem"><label style="font-size:.7rem;color:var(--gray);font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span data-en>Brand Color</span><span data-it>Colore del marchio</span></label><div style="display:flex;gap:.5rem"><span style="width:26px;height:26px;border-radius:50%;background:var(--blue);border:2px solid white;cursor:pointer;display:inline-block"></span><span style="width:26px;height:26px;border-radius:50%;background:var(--red);cursor:pointer;display:inline-block"></span><span style="width:26px;height:26px;border-radius:50%;background:#7c3aed;cursor:pointer;display:inline-block"></span><span style="width:26px;height:26px;border-radius:50%;background:#f59e0b;cursor:pointer;display:inline-block"></span></div></div>
           </div>
         </div>
       </div>
@@ -914,21 +962,21 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
 <section id="results">
   <div class="container">
     <div class="text-center">
-      <div class="section-pill rv">Beyond Support</div>
-      <h2 class="section-h rv">EVERY CHAT IS <span class="grad-red">ALREADY A LEAD</span></h2>
+      <div class="section-pill rv"><span data-en>Beyond Support</span><span data-it>Oltre l'assistenza</span></div>
+      <h2 class="section-h rv"><span data-en>EVERY CHAT IS</span><span data-it>OGNI CHAT È</span> <span class="grad-red"><span data-en>ALREADY A LEAD</span><span data-it>GIÀ UN CONTATTO</span></span></h2>
       <div class="red-line rv"></div>
-      <p class="section-sub rv">Qyara collects name, phone and email before the conversation starts, then sends it where your team already works.</p>
+      <p class="section-sub rv"><span data-en>Qyara collects name, phone and email before the conversation starts, then sends it where your team already works.</span><span data-it>Qyara raccoglie nome, telefono ed email prima dell'inizio della conversazione, poi li invia dove il Suo team già lavora.</span></p>
     </div>
     <div class="res-g">
-      <div class="rc blue rv"><div class="rtag blue">🧲 Lead Capture</div><div class="rbig rb blue">UP FRONT</div><div class="rdesc">The widget asks for name, phone and email before the first message, so every conversation is a lead with contact details attached.</div></div>
-      <div class="rc red rv d1"><div class="rtag red">🔗 CRM Sync</div><div class="rbig rb red">SALESFORCE · HUBSPOT</div><div class="rdesc">Leads captured by the bot land in the CRM your sales team already uses — no copy-paste, no re-entry.</div></div>
-      <div class="rc gold rv d2"><div class="rtag gold">🙋 Human Handoff</div><div class="rbig rb gold">WHEN NEEDED</div><div class="rdesc">When the bot can't help, it escalates to a real agent, and unanswered-query tracking shows what to teach it next.</div></div>
+      <div class="rc blue rv"><div class="rtag blue"><span data-en>🧲 Lead Capture</span><span data-it>🧲 Raccolta contatti</span></div><div class="rbig rb blue"><span data-en>UP FRONT</span><span data-it>FIN DALL'INIZIO</span></div><div class="rdesc"><span data-en>The widget asks for name, phone and email before the first message, so every conversation is a lead with contact details attached.</span><span data-it>Il widget chiede nome, telefono ed email prima del primo messaggio, così ogni conversazione è un contatto con i recapiti già inclusi.</span></div></div>
+      <div class="rc red rv d1"><div class="rtag red"><span data-en>🔗 CRM Sync</span><span data-it>🔗 Sincronizzazione CRM</span></div><div class="rbig rb red"><span data-en>SALESFORCE · HUBSPOT</span><span data-it>SALESFORCE · HUBSPOT</span></div><div class="rdesc"><span data-en>Leads captured by the bot land in the CRM your sales team already uses — no copy-paste, no re-entry.</span><span data-it>I contatti raccolti dal bot arrivano nel CRM che il Suo team commerciale già usa — senza copia e incolla, senza reinserimenti.</span></div></div>
+      <div class="rc gold rv d2"><div class="rtag gold"><span data-en>🙋 Human Handoff</span><span data-it>🙋 Passaggio a un operatore</span></div><div class="rbig rb gold"><span data-en>WHEN NEEDED</span><span data-it>QUANDO SERVE</span></div><div class="rdesc"><span data-en>When the bot can't help, it escalates to a real agent, and unanswered-query tracking shows what to teach it next.</span><span data-it>Quando il bot non può aiutare, passa la conversazione a una persona, e il monitoraggio delle domande senza risposta indica cosa insegnargli.</span></div></div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-<section id="testimonials">
+<section id="testimonials" data-en>
   <div class="container">
     <div class="text-center">
       <div class="section-pill rv">Customer Stories</div>
@@ -950,87 +998,87 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
 <section id="pricing">
   <div class="container">
     <div class="text-center">
-      <div class="section-pill rv">Plans &amp; Pricing</div>
-      <h2 class="section-h rv">CHOOSE YOUR <span class="grad-red">PLAN</span></h2>
+      <div class="section-pill rv"><span data-en>Plans &amp; Pricing</span><span data-it>Piani e prezzi</span></div>
+      <h2 class="section-h rv"><span data-en>CHOOSE YOUR</span><span data-it>SCELGA IL SUO</span> <span class="grad-red"><span data-en>PLAN</span><span data-it>PIANO</span></span></h2>
       <div class="red-line rv"></div>
-      <p class="section-sub rv">Three tiers on the same platform — usage limits and features scale up at each level. Pricing is set per deal, so we build the right plan for your business.</p>
+      <p class="section-sub rv"><span data-en>Three tiers on the same platform — usage limits and features scale up at each level. Pricing is set per deal, so we build the right plan for your business.</span><span data-it>Tre livelli sulla stessa piattaforma — limiti di utilizzo e funzionalità crescono a ogni livello. I prezzi sono definiti caso per caso (IVA esclusa), così costruiamo il piano giusto per la Sua attività.</span></p>
     </div>
     <div class="price-g" style="margin-top:3.5rem">
       <div class="pcard rv">
         <div class="pname">Starter</div>
-        <div class="pdesc">Text-only chat with a capped knowledge base — good for a single site with light traffic.</div>
-        <div class="chips"><span class="chip">10,000 chats/mo</span><span class="chip">500 uploads</span><span class="chip">100 pages/mo</span></div>
-        <button onclick="openForm('Starter Plan')" class="btn btn-ghost" style="width:100%;justify-content:center;padding:.9rem;font-size:.95rem">Get Started →</button>
+        <div class="pdesc"><span data-en>Text-only chat with a capped knowledge base — good for a single site with light traffic.</span><span data-it>Solo chat testuale con base di conoscenza limitata — adatto a un singolo sito con poco traffico.</span></div>
+        <div class="chips"><span class="chip"><span data-en>10,000 chats/mo</span><span data-it>10.000 chat/mese</span></span><span class="chip"><span data-en>500 uploads</span><span data-it>500 caricamenti</span></span><span class="chip"><span data-en>100 pages/mo</span><span data-it>100 pagine/mese</span></span></div>
+        <button onclick="openForm('Starter Plan')" class="btn btn-ghost" style="width:100%;justify-content:center;padding:.9rem;font-size:.95rem"><span data-en>Get Started →</span><span data-it>Inizia ora →</span></button>
         <div class="pdiv"></div>
         <div class="pfeats">
-          <div class="pf"><span class="ok">✓</span>10,000 chat interactions / month</div>
-          <div class="pf"><span class="ok">✓</span>500 document uploads</div>
-          <div class="pf"><span class="ok">✓</span>5 knowledge-enhancement runs / month</div>
-          <div class="pf"><span class="ok">✓</span>100 website pages trained / month</div>
-          <div class="pf"><span class="ok">✓</span>Basic deployment channel</div>
-          <div class="pf no"><span class="ok">✗</span>Human escalation</div>
-          <div class="pf no"><span class="ok">✗</span>CRM integration</div>
-          <div class="pf no"><span class="ok">✗</span>Voice &amp; campaigns</div>
+          <div class="pf"><span class="ok">✓</span><span data-en>10,000 chat interactions / month</span><span data-it>10.000 interazioni di chat al mese</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>500 document uploads</span><span data-it>500 documenti caricabili</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>5 knowledge-enhancement runs / month</span><span data-it>5 elaborazioni di miglioramento al mese</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>100 website pages trained / month</span><span data-it>100 pagine web acquisite al mese</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>Basic deployment channel</span><span data-it>Canale di pubblicazione base</span></div>
+          <div class="pf no"><span class="ok">✗</span><span data-en>Human escalation</span><span data-it>Passaggio a un operatore</span></div>
+          <div class="pf no"><span class="ok">✗</span><span data-en>CRM integration</span><span data-it>Integrazione CRM</span></div>
+          <div class="pf no"><span class="ok">✗</span><span data-en>Voice &amp; campaigns</span><span data-it>Voce e campagne</span></div>
         </div>
       </div>
       <div class="pcard hot rv d1">
-        <div class="pbadge">Most Popular</div>
+        <div class="pbadge"><span data-en>Most Popular</span><span data-it>Il più scelto</span></div>
         <div class="pname">Professional</div>
-        <div class="pdesc">Adds human handoff, CRM integration and multilingual support for a bot doing real qualification work.</div>
-        <div class="chips"><span class="chip hotc">25,000 chats/mo</span><span class="chip hotc">2,000 uploads</span><span class="chip hotc">3 languages</span></div>
-        <button onclick="openForm('Professional Plan')" class="btn btn-blue" style="width:100%;justify-content:center;padding:.9rem;font-size:.95rem">Get Started →</button>
+        <div class="pdesc"><span data-en>Adds human handoff, CRM integration and multilingual support for a bot doing real qualification work.</span><span data-it>Aggiunge passaggio a un operatore, integrazione CRM e supporto multilingue, per un bot che svolge un vero lavoro di qualificazione.</span></div>
+        <div class="chips"><span class="chip hotc"><span data-en>25,000 chats/mo</span><span data-it>25.000 chat/mese</span></span><span class="chip hotc"><span data-en>2,000 uploads</span><span data-it>2.000 caricamenti</span></span><span class="chip hotc"><span data-en>3 languages</span><span data-it>3 lingue</span></span></div>
+        <button onclick="openForm('Professional Plan')" class="btn btn-blue" style="width:100%;justify-content:center;padding:.9rem;font-size:.95rem"><span data-en>Get Started →</span><span data-it>Inizia ora →</span></button>
         <div class="pdiv"></div>
         <div class="pfeats">
-          <div class="pf"><span class="ok">✓</span>25,000 chat interactions / month</div>
-          <div class="pf"><span class="ok">✓</span>2,000 document uploads</div>
-          <div class="pf"><span class="ok">✓</span>15 knowledge-enhancement runs / month</div>
-          <div class="pf"><span class="ok">✓</span>500 website pages trained / month</div>
-          <div class="pf"><span class="ok">✓</span>Human escalation &amp; unanswered-query tracking</div>
-          <div class="pf"><span class="ok">✓</span>Customizable interface</div>
-          <div class="pf"><span class="ok">✓</span>Up to 3 languages</div>
-          <div class="pf"><span class="ok">✓</span>Basic lead intelligence, 1 CRM, dynamic catalog</div>
+          <div class="pf"><span class="ok">✓</span><span data-en>25,000 chat interactions / month</span><span data-it>25.000 interazioni di chat al mese</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>2,000 document uploads</span><span data-it>2.000 documenti caricabili</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>15 knowledge-enhancement runs / month</span><span data-it>15 elaborazioni di miglioramento al mese</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>500 website pages trained / month</span><span data-it>500 pagine web acquisite al mese</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>Human escalation &amp; unanswered-query tracking</span><span data-it>Passaggio a un operatore e monitoraggio delle domande senza risposta</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>Customizable interface</span><span data-it>Interfaccia personalizzabile</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>Up to 3 languages</span><span data-it>Fino a 3 lingue</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>Basic lead intelligence, 1 CRM, dynamic catalog</span><span data-it>Analisi base dei contatti, 1 CRM, catalogo dinamico</span></div>
         </div>
       </div>
       <div class="pcard rv d2">
         <div class="pname">Enterprise</div>
-        <div class="pdesc">Voice, WhatsApp and call campaigns, and the highest ceilings — the bot as a full channel, not just a widget.</div>
-        <div class="chips"><span class="chip redc">75,000 chats/mo</span><span class="chip redc">Voice</span><span class="chip redc">Campaigns</span></div>
-        <button onclick="openForm('Enterprise Plan')" class="btn btn-red" style="width:100%;justify-content:center;padding:.9rem;font-size:.95rem">Contact Us →</button>
+        <div class="pdesc"><span data-en>Voice, WhatsApp and call campaigns, and the highest ceilings — the bot as a full channel, not just a widget.</span><span data-it>Voce, campagne WhatsApp e chiamate, e i limiti più alti — il bot come canale a tutti gli effetti, non solo un widget.</span></div>
+        <div class="chips"><span class="chip redc"><span data-en>75,000 chats/mo</span><span data-it>75.000 chat/mese</span></span><span class="chip redc"><span data-en>Voice</span><span data-it>Voce</span></span><span class="chip redc"><span data-en>Campaigns</span><span data-it>Campagne</span></span></div>
+        <button onclick="openForm('Enterprise Plan')" class="btn btn-red" style="width:100%;justify-content:center;padding:.9rem;font-size:.95rem"><span data-en>Contact Us →</span><span data-it>Ci contatti →</span></button>
         <div class="pdiv"></div>
         <div class="pfeats">
-          <div class="pf"><span class="ok">✓</span>75,000 chat interactions / month</div>
-          <div class="pf"><span class="ok">✓</span>10,000 document uploads</div>
-          <div class="pf"><span class="ok">✓</span>50 knowledge-enhancement runs / month</div>
-          <div class="pf"><span class="ok">✓</span>2,000 website pages trained / month</div>
-          <div class="pf"><span class="ok">✓</span>All languages</div>
-          <div class="pf"><span class="ok">✓</span>Voice interaction &amp; text-to-speech</div>
-          <div class="pf"><span class="ok">✓</span>Call &amp; WhatsApp campaigns, call button in widget</div>
-          <div class="pf"><span class="ok">✓</span>Advanced lead intelligence &amp; integrations</div>
+          <div class="pf"><span class="ok">✓</span><span data-en>75,000 chat interactions / month</span><span data-it>75.000 interazioni di chat al mese</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>10,000 document uploads</span><span data-it>10.000 documenti caricabili</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>50 knowledge-enhancement runs / month</span><span data-it>50 elaborazioni di miglioramento al mese</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>2,000 website pages trained / month</span><span data-it>2.000 pagine web acquisite al mese</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>All languages</span><span data-it>Tutte le lingue</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>Voice interaction &amp; text-to-speech</span><span data-it>Interazione vocale e sintesi vocale</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>Call &amp; WhatsApp campaigns, call button in widget</span><span data-it>Campagne di chiamate e WhatsApp, pulsante di chiamata nel widget</span></div>
+          <div class="pf"><span class="ok">✓</span><span data-en>Advanced lead intelligence &amp; integrations</span><span data-it>Analisi avanzata dei contatti e integrazioni avanzate</span></div>
         </div>
       </div>
     </div>
 
-    <h3 class="cmp-h rv">Compare plans side by side</h3>
+    <h3 class="cmp-h rv"><span data-en>Compare plans side by side</span><span data-it>Confronti i piani</span></h3>
     <div class="cmp-wrap rv">
       <table class="cmp">
-        <thead><tr><th>Feature</th><th>Starter</th><th>Professional</th><th>Enterprise</th></tr></thead>
+        <thead><tr><th><span data-en>Feature</span><span data-it>Funzionalità</span></th><th>Starter</th><th>Professional</th><th>Enterprise</th></tr></thead>
         <tbody>
-          <tr><td>Monthly chat interactions</td><td>10,000</td><td>25,000</td><td>75,000</td></tr>
-          <tr><td>Document uploads</td><td>500</td><td>2,000</td><td>10,000</td></tr>
-          <tr><td>Knowledge-enhancement runs / mo</td><td>5</td><td>15</td><td>50</td></tr>
-          <tr><td>Pages trained via web scraping / mo</td><td>100</td><td>500</td><td>2,000</td></tr>
-          <tr><td>Human escalation</td><td class="x">—</td><td class="y">✓</td><td class="y">✓</td></tr>
-          <tr><td>Unanswered-query tracking</td><td class="x">—</td><td class="y">✓</td><td class="y">✓</td></tr>
-          <tr><td>Customizable interface</td><td class="x">—</td><td class="y">✓</td><td class="y">✓</td></tr>
-          <tr><td>Multilingual interactions</td><td class="x">—</td><td>Up to 3 languages</td><td>All languages</td></tr>
-          <tr><td>Deployment channel tier</td><td>Basic</td><td>Professional</td><td>Advanced</td></tr>
-          <tr><td>Lead intelligence</td><td class="x">—</td><td>Basic</td><td>Advanced</td></tr>
-          <tr><td>CRM / third-party integrations</td><td class="x">—</td><td>1 CRM</td><td>Advanced</td></tr>
-          <tr><td>Dynamic catalog / listing</td><td class="x">—</td><td class="y">✓</td><td class="y">✓</td></tr>
-          <tr><td>Text-to-speech</td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
-          <tr><td>Voice-based interaction</td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
-          <tr><td>Call &amp; WhatsApp campaigns</td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
-          <tr><td>Call button in web widget</td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
+          <tr><td><span data-en>Monthly chat interactions</span><span data-it>Interazioni di chat al mese</span></td><td><span data-en>10,000</span><span data-it>10.000</span></td><td><span data-en>25,000</span><span data-it>25.000</span></td><td><span data-en>75,000</span><span data-it>75.000</span></td></tr>
+          <tr><td><span data-en>Document uploads</span><span data-it>Documenti caricabili</span></td><td>500</td><td><span data-en>2,000</span><span data-it>2.000</span></td><td><span data-en>10,000</span><span data-it>10.000</span></td></tr>
+          <tr><td><span data-en>Knowledge-enhancement runs / mo</span><span data-it>Elaborazioni di miglioramento / mese</span></td><td>5</td><td>15</td><td>50</td></tr>
+          <tr><td><span data-en>Pages trained via web scraping / mo</span><span data-it>Pagine acquisite dal web / mese</span></td><td>100</td><td>500</td><td><span data-en>2,000</span><span data-it>2.000</span></td></tr>
+          <tr><td><span data-en>Human escalation</span><span data-it>Passaggio a un operatore</span></td><td class="x">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><td><span data-en>Unanswered-query tracking</span><span data-it>Monitoraggio delle domande senza risposta</span></td><td class="x">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><td><span data-en>Customizable interface</span><span data-it>Interfaccia personalizzabile</span></td><td class="x">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><td><span data-en>Multilingual interactions</span><span data-it>Interazioni multilingue</span></td><td class="x">—</td><td><span data-en>Up to 3 languages</span><span data-it>Fino a 3 lingue</span></td><td><span data-en>All languages</span><span data-it>Tutte le lingue</span></td></tr>
+          <tr><td><span data-en>Deployment channel tier</span><span data-it>Livello del canale di pubblicazione</span></td><td><span data-en>Basic</span><span data-it>Base</span></td><td>Professional</td><td><span data-en>Advanced</span><span data-it>Avanzato</span></td></tr>
+          <tr><td><span data-en>Lead intelligence</span><span data-it>Analisi dei contatti</span></td><td class="x">—</td><td><span data-en>Basic</span><span data-it>Base</span></td><td><span data-en>Advanced</span><span data-it>Avanzato</span></td></tr>
+          <tr><td><span data-en>CRM / third-party integrations</span><span data-it>Integrazioni CRM / di terze parti</span></td><td class="x">—</td><td>1 CRM</td><td><span data-en>Advanced</span><span data-it>Avanzato</span></td></tr>
+          <tr><td><span data-en>Dynamic catalog / listing</span><span data-it>Catalogo / schede dinamiche</span></td><td class="x">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><td><span data-en>Text-to-speech</span><span data-it>Sintesi vocale</span></td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
+          <tr><td><span data-en>Voice-based interaction</span><span data-it>Interazione vocale</span></td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
+          <tr><td><span data-en>Call &amp; WhatsApp campaigns</span><span data-it>Campagne di chiamate e WhatsApp</span></td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
+          <tr><td><span data-en>Call button in web widget</span><span data-it>Pulsante di chiamata nel widget web</span></td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
         </tbody>
       </table>
     </div>
@@ -1045,47 +1093,46 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
       <img src="android-chrome-512x512.png" alt="Qyara" style="width:32px;height:32px;border-radius:8px;object-fit:cover" width="32" height="32" loading="lazy"/>
       <div class="logo-word" style="font-size:1.2rem;margin-left:0"><span class="lw-q">Q</span><span class="lw-yara">yara</span><span class="lw-dot">.</span><span class="lw-ai">ai</span></div>
     </div>
-    <h3 id="modalTitle" style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.03em;margin-bottom:.4rem">GET STARTED WITH QYARA</h3>
-    <p style="color:var(--gray);font-size:.87rem;margin-bottom:2rem;line-height:1.6">Fill in your details below and our team will get back to you within 24 hours.</p>
+    <h3 id="modalTitle" style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.03em;margin-bottom:.4rem"><span data-en>GET STARTED WITH QYARA</span><span data-it>INIZI CON QYARA</span></h3>
+    <p style="color:var(--gray);font-size:.87rem;margin-bottom:2rem;line-height:1.6"><span data-en>Fill in your details below and our team will get back to you within 24 hours.</span><span data-it>Compili i campi qui sotto e il nostro team Le risponderà entro 24 ore.</span></p>
     <form id="contactForm" onsubmit="submitForm(event)">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
         <div>
-          <label style="font-size:.72rem;color:var(--gray);font-weight:700;letter-spacing:.07em;text-transform:uppercase;display:block;margin-bottom:.4rem">Your Name *</label>
-          <input type="text" id="cf-name" required placeholder="John Smith" style="width:100%;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--white);padding:.7rem 1rem;border-radius:9px;font-size:.88rem;outline:none;font-family:'Space Grotesk',sans-serif;transition:border .2s" onfocus="this.style.borderColor='rgba(30,95,255,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.07)'"/>
+          <label style="font-size:.72rem;color:var(--gray);font-weight:700;letter-spacing:.07em;text-transform:uppercase;display:block;margin-bottom:.4rem"><span data-en>Your Name *</span><span data-it>Il Suo nome *</span></label>
+          <input type="text" id="cf-name" required placeholder="John Smith" data-it-placeholder="Mario Rossi" style="width:100%;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--white);padding:.7rem 1rem;border-radius:9px;font-size:.88rem;outline:none;font-family:'Space Grotesk',sans-serif;transition:border .2s" onfocus="this.style.borderColor='rgba(30,95,255,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.07)'"/>
         </div>
         <div>
-          <label style="font-size:.72rem;color:var(--gray);font-weight:700;letter-spacing:.07em;text-transform:uppercase;display:block;margin-bottom:.4rem">Email Address *</label>
+          <label style="font-size:.72rem;color:var(--gray);font-weight:700;letter-spacing:.07em;text-transform:uppercase;display:block;margin-bottom:.4rem"><span data-en>Email Address *</span><span data-it>Indirizzo email *</span></label>
           <input type="email" id="cf-email" required placeholder="you@company.com" style="width:100%;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--white);padding:.7rem 1rem;border-radius:9px;font-size:.88rem;outline:none;font-family:'Space Grotesk',sans-serif;transition:border .2s" onfocus="this.style.borderColor='rgba(30,95,255,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.07)'"/>
         </div>
       </div>
       <div style="margin-bottom:1rem">
-        <label style="font-size:.72rem;color:var(--gray);font-weight:700;letter-spacing:.07em;text-transform:uppercase;display:block;margin-bottom:.4rem">Plan / Subject *</label>
+        <label style="font-size:.72rem;color:var(--gray);font-weight:700;letter-spacing:.07em;text-transform:uppercase;display:block;margin-bottom:.4rem"><span data-en>Plan / Subject *</span><span data-it>Piano / Oggetto *</span></label>
         <select id="cf-subject" required style="width:100%;background:#1a2235;border:1px solid var(--border);color:var(--white);padding:.7rem 1rem;border-radius:9px;font-size:.88rem;outline:none;font-family:'Space Grotesk',sans-serif;cursor:pointer;transition:border .2s;appearance:none" onfocus="this.style.borderColor='rgba(30,95,255,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.07)'">
-          <option value="" disabled selected>Select a plan or topic…</option>
-          <option value="Starter Plan — I want to get started">🚀 Starter Plan</option>
-          <option value="Professional Plan — I need more features">⚡ Professional Plan</option>
-          <option value="Enterprise Plan — White-label &amp; agency">🏢 Enterprise / Agency Plan</option>
-          <option value="Demo Request — I want to see Qyara in action">👀 Request a Demo</option>
-          <option value="Free Trial — I want to try Qyara for free">🎁 Start Free Trial</option>
-          <option value="Partnership — I want to resell Qyara">🤝 Partnership / Reseller</option>
-          <option value="General Inquiry">💬 General Inquiry</option>
+          <option value="" disabled selected data-t-en="Select a plan or topic…" data-t-it="Selezioni un piano o un argomento…">Select a plan or topic…</option>
+          <option value="Starter Plan — I want to get started" data-t-en="🚀 Starter Plan" data-t-it="🚀 Piano Starter">🚀 Starter Plan</option>
+          <option value="Professional Plan — I need more features" data-t-en="⚡ Professional Plan" data-t-it="⚡ Piano Professional">⚡ Professional Plan</option>
+          <option value="Enterprise Plan — White-label &amp; agency" data-t-en="🏢 Enterprise / Agency Plan" data-t-it="🏢 Piano Enterprise / Agenzie">🏢 Enterprise / Agency Plan</option>
+          <option value="Demo Request — I want to see Qyara in action" data-t-en="👀 Request a Demo" data-t-it="👀 Richiedere una demo">👀 Request a Demo</option>
+          <option value="Partnership — I want to resell Qyara" data-t-en="🤝 Partnership / Reseller" data-t-it="🤝 Partnership / Rivenditore">🤝 Partnership / Reseller</option>
+          <option value="General Inquiry" data-t-en="💬 General Inquiry" data-t-it="💬 Richiesta generica">💬 General Inquiry</option>
         </select>
       </div>
       <div style="margin-bottom:1rem">
-        <label style="font-size:.72rem;color:var(--gray);font-weight:700;letter-spacing:.07em;text-transform:uppercase;display:block;margin-bottom:.4rem">Your Business / Website</label>
-        <input type="text" id="cf-business" placeholder="yourcompany.com or business name" style="width:100%;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--white);padding:.7rem 1rem;border-radius:9px;font-size:.88rem;outline:none;font-family:'Space Grotesk',sans-serif;transition:border .2s" onfocus="this.style.borderColor='rgba(30,95,255,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.07)'"/>
+        <label style="font-size:.72rem;color:var(--gray);font-weight:700;letter-spacing:.07em;text-transform:uppercase;display:block;margin-bottom:.4rem"><span data-en>Your Business / Website</span><span data-it>La Sua attività / sito web</span></label>
+        <input type="text" id="cf-business" placeholder="yourcompany.com or business name" data-it-placeholder="nomeattivita.it oppure nome dell'attività" style="width:100%;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--white);padding:.7rem 1rem;border-radius:9px;font-size:.88rem;outline:none;font-family:'Space Grotesk',sans-serif;transition:border .2s" onfocus="this.style.borderColor='rgba(30,95,255,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.07)'"/>
       </div>
       <div style="margin-bottom:1.5rem">
-        <label style="font-size:.72rem;color:var(--gray);font-weight:700;letter-spacing:.07em;text-transform:uppercase;display:block;margin-bottom:.4rem">Message *</label>
-        <textarea id="cf-message" required placeholder="Tell us about your business and what you need…" rows="4" style="width:100%;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--white);padding:.7rem 1rem;border-radius:9px;font-size:.88rem;outline:none;font-family:'Space Grotesk',sans-serif;resize:vertical;transition:border .2s" onfocus="this.style.borderColor='rgba(30,95,255,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.07)'"></textarea>
+        <label style="font-size:.72rem;color:var(--gray);font-weight:700;letter-spacing:.07em;text-transform:uppercase;display:block;margin-bottom:.4rem"><span data-en>Message *</span><span data-it>Messaggio *</span></label>
+        <textarea id="cf-message" required placeholder="Tell us about your business and what you need…" data-it-placeholder="Ci racconti la Sua attività e di cosa ha bisogno…" rows="4" style="width:100%;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--white);padding:.7rem 1rem;border-radius:9px;font-size:.88rem;outline:none;font-family:'Space Grotesk',sans-serif;resize:vertical;transition:border .2s" onfocus="this.style.borderColor='rgba(30,95,255,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.07)'"></textarea>
       </div>
-      <button type="submit" class="btn btn-red" style="width:100%;justify-content:center;padding:1rem;font-size:1rem" id="submitBtn">Send Message →</button>
-      <p style="text-align:center;font-size:.75rem;color:var(--gray2);margin-top:.9rem">We reply within 24 hours · <a href="mailto:qyara.ai.site@gmail.com" style="color:var(--blue3);text-decoration:none">qyara.ai.site@gmail.com</a></p>
+      <button type="submit" class="btn btn-red" style="width:100%;justify-content:center;padding:1rem;font-size:1rem" id="submitBtn"><span data-en>Send Message →</span><span data-it>Invia messaggio →</span></button>
+      <p style="text-align:center;font-size:.75rem;color:var(--gray2);margin-top:.9rem"><span data-en>We reply within 24 hours ·</span><span data-it>Rispondiamo entro 24 ore ·</span> <a href="mailto:qyara.ai.site@gmail.com" style="color:var(--blue3);text-decoration:none">qyara.ai.site@gmail.com</a></p>
     </form>
     <div id="formSuccess" style="display:none;text-align:center;padding:2rem 0">
       <div style="font-size:3rem;margin-bottom:1rem">✅</div>
-      <h4 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.03em;margin-bottom:.5rem">MESSAGE SENT!</h4>
-      <p style="color:var(--gray);font-size:.9rem;line-height:1.6">Thank you! Our team will get back to you within 24 hours.<br>Check your inbox for a confirmation.</p>
+      <h4 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.03em;margin-bottom:.5rem"><span data-en>MESSAGE SENT!</span><span data-it>MESSAGGIO INVIATO!</span></h4>
+      <p style="color:var(--gray);font-size:.9rem;line-height:1.6"><span data-en>Thank you! Our team will get back to you within 24 hours.</span><span data-it>Grazie! Il nostro team Le risponderà entro 24 ore.</span><br><span data-en>Check your inbox for a confirmation.</span><span data-it>Controlli la Sua casella di posta per la conferma.</span></p>
     </div>
   </div>
 </div>
@@ -1095,17 +1142,17 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
   <div class="container">
     <div class="text-center">
       <div class="section-pill rv">FAQ</div>
-      <h2 class="section-h rv">QUESTIONS? <span class="grad-blue">WE HAVE</span> <span class="grad-red">ANSWERS</span></h2>
+      <h2 class="section-h rv"><span data-en>QUESTIONS?</span><span data-it>DOMANDE?</span> <span class="grad-blue"><span data-en>WE HAVE</span><span data-it>ABBIAMO LE</span></span> <span class="grad-red"><span data-en>ANSWERS</span><span data-it>RISPOSTE</span></span></h2>
       <div class="red-line rv"></div>
     </div>
     <div class="faq-wrap">
-      <div class="fqi rv"><button class="fqq" onclick="tFaq(this)">What is Qyara and how does it work? <span class="farrow">+</span></button><div class="fqa">Qyara is a white-label AI chatbot platform. You train it once on your own content — website pages, uploaded files, manual Q&amp;A, Notion, Google Drive or Calendly — and it answers customers by text or voice on your website, on WhatsApp, or through a shareable chat link. An admin console lets your team manage the knowledge base and watch every conversation.</div></div>
-      <div class="fqi rv"><button class="fqq" onclick="tFaq(this)">How is Qyara different from ChatGPT? <span class="farrow">+</span></button><div class="fqa">ChatGPT is trained on the open internet and doesn't know your business. Qyara answers from a knowledge base you control, using retrieval over your own content, so replies reflect your products, policies and pricing. You can test answers privately in the Playground before anything goes live.</div></div>
-      <div class="fqi rv"><button class="fqq" onclick="tFaq(this)">How do I train the bot on my website? <span class="farrow">+</span></button><div class="fqa">Open Knowledge Base → Website Upload and enter a URL. Qyara scrapes that page, or — with Crawl switched on — follows every in-scope link and ingests all of them automatically. You can also upload files, add Q&amp;A by hand, or pull content from Notion, Google Drive and Calendly.</div></div>
-      <div class="fqi rv"><button class="fqq" onclick="tFaq(this)">Can customers talk to the bot by voice? <span class="farrow">+</span></button><div class="fqa">Yes, on the Enterprise plan. The same widget offers Start Chat or Start Call, and voice is a real conversational AI call powered by ElevenLabs — not a script. Enterprise also adds text-to-speech, a call button in the web widget, and outbound call and WhatsApp campaigns.</div></div>
-      <div class="fqi rv"><button class="fqq" onclick="tFaq(this)">Which integrations are supported? <span class="farrow">+</span></button><div class="fqa">Google Drive, Notion and Calendly feed knowledge and scheduling data in. Salesforce and HubSpot receive the leads the bot captures. WhatsApp and Twilio power outbound campaigns and widget calls, and SMTP email routes support queries into the same console. Professional includes 1 CRM; Enterprise includes advanced integrations.</div></div>
-      <div class="fqi rv"><button class="fqq" onclick="tFaq(this)">What does it cost? <span class="farrow">+</span></button><div class="fqa">Qyara has three tiers — Starter, Professional and Enterprise — with usage limits and features that scale at each level. Pricing is set per deal rather than fixed in-product, so get in touch and we'll scope the right plan for you.</div></div>
-      <div class="fqi rv"><button class="fqq" onclick="tFaq(this)">Can a human take over a conversation? <span class="farrow">+</span></button><div class="fqa">Yes. Professional and Enterprise plans include human escalation, which hands the chat to a real agent when the bot can't help, plus unanswered-query tracking so you can see what to add to the knowledge base next.</div></div>
+      <div class="fqi rv"><button class="fqq" onclick="tFaq(this)"><span data-en>What is Qyara and how does it work?</span><span data-it>Che cos'è Qyara e come funziona?</span> <span class="farrow">+</span></button><div class="fqa"><span data-en>Qyara is a white-label AI chatbot platform. You train it once on your own content — website pages, uploaded files, manual Q&amp;A, Notion, Google Drive or Calendly — and it answers customers by text or voice on your website, on WhatsApp, or through a shareable chat link. An admin console lets your team manage the knowledge base and watch every conversation.</span><span data-it>Qyara è una piattaforma di chatbot AI in white label. La addestra una sola volta sui Suoi contenuti — pagine del sito, file caricati, domande e risposte inserite a mano, Notion, Google Drive o Calendly — e risponde ai clienti via testo o voce sul Suo sito, su WhatsApp o tramite un link di chat condivisibile. Una console di amministrazione permette al Suo team di gestire la base di conoscenza e seguire ogni conversazione.</span></div></div>
+      <div class="fqi rv"><button class="fqq" onclick="tFaq(this)"><span data-en>How is Qyara different from ChatGPT?</span><span data-it>In cosa Qyara è diverso da ChatGPT?</span> <span class="farrow">+</span></button><div class="fqa"><span data-en>ChatGPT is trained on the open internet and doesn't know your business. Qyara answers from a knowledge base you control, using retrieval over your own content, so replies reflect your products, policies and pricing. You can test answers privately in the Playground before anything goes live.</span><span data-it>ChatGPT è addestrato sull'internet aperto e non conosce la Sua attività. Qyara risponde a partire da una base di conoscenza che controlla Lei, recuperando le informazioni dai Suoi contenuti, così le risposte riflettono prodotti, politiche e prezzi. Può provare le risposte in privato nel Playground prima di andare online.</span></div></div>
+      <div class="fqi rv"><button class="fqq" onclick="tFaq(this)"><span data-en>How do I train the bot on my website?</span><span data-it>Come addestro il bot sul mio sito?</span> <span class="farrow">+</span></button><div class="fqa"><span data-en>Open Knowledge Base → Website Upload and enter a URL. Qyara scrapes that page, or — with Crawl switched on — follows every in-scope link and ingests all of them automatically. You can also upload files, add Q&amp;A by hand, or pull content from Notion, Google Drive and Calendly.</span><span data-it>Apra Knowledge Base → Website Upload e inserisca un URL. Qyara acquisisce quella pagina oppure — con la scansione attiva — segue ogni link pertinente e li importa tutti automaticamente. Può anche caricare file, aggiungere domande e risposte a mano o importare contenuti da Notion, Google Drive e Calendly.</span></div></div>
+      <div class="fqi rv"><button class="fqq" onclick="tFaq(this)"><span data-en>Can customers talk to the bot by voice?</span><span data-it>I clienti possono parlare con il bot a voce?</span> <span class="farrow">+</span></button><div class="fqa"><span data-en>Yes, on the Enterprise plan. The same widget offers Start Chat or Start Call, and voice is a real conversational AI call powered by ElevenLabs — not a script. Enterprise also adds text-to-speech, a call button in the web widget, and outbound call and WhatsApp campaigns.</span><span data-it>Sì, con il piano Enterprise. Lo stesso widget offre «Avvia chat» o «Avvia chiamata», e la voce è una vera chiamata conversazionale con AI, basata su ElevenLabs — non un copione. Enterprise aggiunge anche la sintesi vocale, un pulsante di chiamata nel widget web e campagne di chiamate e WhatsApp in uscita.</span></div></div>
+      <div class="fqi rv"><button class="fqq" onclick="tFaq(this)"><span data-en>Which integrations are supported?</span><span data-it>Quali integrazioni sono supportate?</span> <span class="farrow">+</span></button><div class="fqa"><span data-en>Google Drive, Notion and Calendly feed knowledge and scheduling data in. Salesforce and HubSpot receive the leads the bot captures. WhatsApp and Twilio power outbound campaigns and widget calls, and SMTP email routes support queries into the same console. Professional includes 1 CRM; Enterprise includes advanced integrations.</span><span data-it>Google Drive, Notion e Calendly forniscono conoscenza e dati di prenotazione. Salesforce e HubSpot ricevono i contatti raccolti dal bot. WhatsApp e Twilio alimentano le campagne in uscita e le chiamate dal widget, e l'email SMTP porta le richieste di supporto nella stessa console. Professional include 1 CRM; Enterprise include integrazioni avanzate.</span></div></div>
+      <div class="fqi rv"><button class="fqq" onclick="tFaq(this)"><span data-en>What does it cost?</span><span data-it>Quanto costa?</span> <span class="farrow">+</span></button><div class="fqa"><span data-en>Qyara has three tiers — Starter, Professional and Enterprise — with usage limits and features that scale at each level. Pricing is set per deal rather than fixed in-product, so get in touch and we'll scope the right plan for you.</span><span data-it>Qyara ha tre livelli — Starter, Professional ed Enterprise — con limiti di utilizzo e funzionalità che crescono a ogni livello. Il prezzo è definito caso per caso (IVA esclusa) e non è fisso nel prodotto: ci contatti e valuteremo insieme il piano giusto.</span></div></div>
+      <div class="fqi rv"><button class="fqq" onclick="tFaq(this)"><span data-en>Can a human take over a conversation?</span><span data-it>Una persona può subentrare in una conversazione?</span> <span class="farrow">+</span></button><div class="fqa"><span data-en>Yes. Professional and Enterprise plans include human escalation, which hands the chat to a real agent when the bot can't help, plus unanswered-query tracking so you can see what to add to the knowledge base next.</span><span data-it>Sì. I piani Professional ed Enterprise includono il passaggio a un operatore, che affida la chat a una persona quando il bot non può aiutare, più il monitoraggio delle domande senza risposta per vedere cosa aggiungere alla base di conoscenza.</span></div></div>
     </div>
   </div>
 </section>
@@ -1114,14 +1161,14 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
 <section id="final">
   <div class="container">
     <div class="cta-box rv">
-      <div class="section-pill" style="margin:0 auto 1.5rem">🚀 Get Started Today</div>
-      <h2>PUT AN AI CHANNEL<br><span class="grad-red">ON YOUR BUSINESS</span></h2>
-      <p>Train Qyara on your own content once, then deploy it on your website, WhatsApp or a shareable link. Talk to us and we will scope the right plan.</p>
+      <div class="section-pill" style="margin:0 auto 1.5rem"><span data-en>🚀 Get Started Today</span><span data-it>🚀 Inizi oggi</span></div>
+      <h2><span data-en>PUT AN AI CHANNEL</span><span data-it>AGGIUNGA UN CANALE AI</span><br><span class="grad-red"><span data-en>ON YOUR BUSINESS</span><span data-it>ALLA SUA ATTIVITÀ</span></span></h2>
+      <p><span data-en>Train Qyara on your own content once, then deploy it on your website, WhatsApp or a shareable link. Talk to us and we will scope the right plan.</span><span data-it>Addestri Qyara una sola volta sui Suoi contenuti, poi lo pubblichi sul Suo sito, su WhatsApp o tramite un link condivisibile. Ci contatti e valuteremo insieme il piano giusto.</span></p>
       <div class="cta-btns">
-        <button onclick="openForm('Demo Request')" class="btn btn-red">Request a Demo</button>
-        <button onclick="openForm('General Inquiry')" class="btn btn-outline-w">Talk to Us</button>
+        <button onclick="openForm('Demo Request')" class="btn btn-red"><span data-en>Request a Demo</span><span data-it>Richieda una demo</span></button>
+        <button onclick="openForm('General Inquiry')" class="btn btn-outline-w"><span data-en>Talk to Us</span><span data-it>Parli con noi</span></button>
       </div>
-      <p class="cta-sm">✓ Text &amp; voice &nbsp;·&nbsp; ✓ Website, WhatsApp &amp; link &nbsp;·&nbsp; ✓ CRM lead sync</p>
+      <p class="cta-sm"><span data-en>✓ Text &amp; voice &nbsp;·&nbsp; ✓ Website, WhatsApp &amp; link &nbsp;·&nbsp; ✓ CRM lead sync</span><span data-it>✓ Testo e voce &nbsp;·&nbsp; ✓ Sito, WhatsApp e link &nbsp;·&nbsp; ✓ Sincronizzazione lead con il CRM</span></p>
     </div>
   </div>
 </section>
@@ -1141,7 +1188,7 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
             <div class="lb2"><div class="lb-dot"></div><div class="lb-dot"></div></div>
           </div>
         </a>
-        <p>White-label AI chatbots trained on your content. Text and voice, on your website, WhatsApp or a shareable link.</p>
+        <p><span data-en>White-label AI chatbots trained on your content. Text and voice, on your website, WhatsApp or a shareable link.</span><span data-it>Chatbot AI in white label addestrati sui Suoi contenuti. Testo e voce, sul Suo sito, su WhatsApp o tramite link condivisibile.</span></p>
         <div class="socials">
           <a href="https://twitter.com/qyaraai" target="_blank" rel="noopener" class="soc" aria-label="Twitter / X">𝕏</a>
           <a href="https://www.linkedin.com/company/qyara" target="_blank" rel="noopener" class="soc" aria-label="LinkedIn">in</a>
@@ -1150,37 +1197,37 @@ footer{border-top:1px solid var(--border);padding:4rem 0 2rem;background:#080c1a
         </div>
       </div>
       <div class="foot-col">
-        <h3>Product</h3>
+        <h3><span data-en>Product</span><span data-it>Prodotto</span></h3>
         <ul>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#how">How It Works</a></li>
-          <li><a href="#integrations">Integrations</a></li>
-          <li><a href="#">API Docs</a></li>
+          <li><a href="#features"><span data-en>Features</span><span data-it>Funzionalità</span></a></li>
+          <li><a href="#pricing"><span data-en>Pricing</span><span data-it>Prezzi</span></a></li>
+          <li><a href="#how"><span data-en>How It Works</span><span data-it>Come funziona</span></a></li>
+          <li><a href="#integrations"><span data-en>Integrations</span><span data-it>Integrazioni</span></a></li>
+          <li><a href="#"><span data-en>API Docs</span><span data-it>Documentazione API</span></a></li>
         </ul>
       </div>
       <div class="foot-col">
-        <h3>Company</h3>
+        <h3><span data-en>Company</span><span data-it>Azienda</span></h3>
         <ul>
-          <li><a href="#">About Us</a></li>
+          <li><a href="#"><span data-en>About Us</span><span data-it>Chi siamo</span></a></li>
           <li><a href="#">Blog</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="mailto:hello@qyara.ai">Contact</a></li>
+          <li><a href="#"><span data-en>Careers</span><span data-it>Lavora con noi</span></a></li>
+          <li><a href="mailto:hello@qyara.site"><span data-en>Contact</span><span data-it>Contatti</span></a></li>
         </ul>
       </div>
       <div class="foot-col">
-        <h3>Legal</h3>
+        <h3><span data-en>Legal</span><span data-it>Note legali</span></h3>
         <ul>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Security</a></li>
-          <li><a href="#">GDPR</a></li>
+          <li><a href="/privacy/"><span data-en>Privacy Policy</span><span data-it>Informativa sulla privacy</span></a></li>
+          <li><a href="#"><span data-en>Terms of Service</span><span data-it>Termini di servizio</span></a></li>
+          <li><a href="#"><span data-en>Security</span><span data-it>Sicurezza</span></a></li>
+          <li><a href="/privacy/">GDPR</a></li>
         </ul>
       </div>
     </div>
     <div class="foot-bot">
-      <div class="foot-copy">© 2025 Qyara. All rights reserved. Built for businesses that want AI that actually works.</div>
-      <div class="foot-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div>
+      <div class="foot-copy"><span data-en>© 2026 Qyara. All rights reserved. Built for businesses that want AI that actually works.</span><span data-it>© 2026 Qyara. Tutti i diritti riservati. Pensato per le attività che vogliono un'AI che funzioni davvero.</span></div>
+      <div class="foot-legal"><a href="/privacy/"><span data-en>Privacy</span><span data-it>Privacy</span></a><a href="#"><span data-en>Terms</span><span data-it>Termini</span></a><a href="/privacy/#cookies"><span data-en>Cookies</span><span data-it>Cookie</span></a></div>
     </div>
   </div>
 </footer>
@@ -1251,7 +1298,7 @@ function setStep(el,idx){
 
 /* PROGRESS */
 let p=0;const pf=document.getElementById('pf'),pl=document.getElementById('pl');
-if(pf){setTimeout(()=>{const iv=setInterval(()=>{p=Math.min(p+Math.random()*2.5,100);pf.style.width=p+'%';if(pl)pl.textContent=`Training… ${Math.floor(p)}%`;if(p>=100){clearInterval(iv);if(pl){pl.textContent='✓ Training complete!';pl.style.color='#4ade80';}}},80);},900);}
+if(pf){setTimeout(()=>{const iv=setInterval(()=>{p=Math.min(p+Math.random()*2.5,100);pf.style.width=p+'%';if(pl)pl.innerHTML=`<span data-en>Training… ${Math.floor(p)}%</span><span data-it>Addestramento… ${Math.floor(p)}%</span>`;if(p>=100){clearInterval(iv);if(pl){pl.innerHTML='<span data-en>✓ Training complete!</span><span data-it>✓ Addestramento completato!</span>';pl.style.color='#4ade80';}}},80);},900);}
 
 /* CONTACT FORM MODAL */
 function openForm(plan){
@@ -1274,7 +1321,7 @@ function closeForm(){
   document.body.style.overflow='';
   document.getElementById('contactForm').style.display='block';
   document.getElementById('formSuccess').style.display='none';
-  document.getElementById('submitBtn').textContent='Send Message →';
+  document.getElementById('submitBtn').innerHTML='<span data-en>Send Message →</span><span data-it>Invia messaggio →</span>';
   document.getElementById('submitBtn').disabled=false;
 }
 document.getElementById('contactModal').addEventListener('click',function(e){if(e.target===this)closeForm();});
@@ -1286,7 +1333,7 @@ function submitForm(e){
   const business=document.getElementById('cf-business').value;
   const message=document.getElementById('cf-message').value;
   const btn=document.getElementById('submitBtn');
-  btn.textContent='Sending…';btn.disabled=true;
+  btn.innerHTML='<span data-en>Sending…</span><span data-it>Invio in corso…</span>';btn.disabled=true;
   const body=`Name: ${name}%0AEmail: ${email}%0ABusiness: ${business||'Not provided'}%0A%0APlan/Subject: ${subject}%0A%0AMessage:%0A${encodeURIComponent(message)}`;
   const mailtoLink=`mailto:qyara.ai.site@gmail.com?subject=${encodeURIComponent('Qyara Inquiry: '+subject)}&body=${body}`;
   window.location.href=mailtoLink;
@@ -1301,6 +1348,65 @@ function tFaq(btn){const item=btn.parentElement;const was=item.classList.contain
 
 /* SMOOTH SCROLL */
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
+</script>
+
+<script>
+(function () {
+  var KEY = 'qyara-lang';
+  var META = {
+    en: {
+      title: 'Qyara — White-Label AI Chatbot Platform | Text & Voice',
+      description: 'Qyara is a white-label AI chatbot platform. Train it on your own content once and it answers customers by text or voice on your website, WhatsApp or a shareable chat link.',
+      ogTitle: 'Qyara — AI Chatbots Trained on Your Business Content',
+      ogDescription: 'White-label AI chatbot platform: train it on your content once, answer customers by text or voice on your website, WhatsApp or a chat link.'
+    },
+    it: {
+      title: 'Qyara — Piattaforma chatbot AI in white label | Testo e voce',
+      description: 'Qyara è una piattaforma di chatbot AI in white label. La addestri una sola volta sui Suoi contenuti e risponde ai clienti via testo o voce sul Suo sito, su WhatsApp o tramite un link di chat.',
+      ogTitle: 'Qyara — Chatbot AI addestrati sui contenuti della Sua attività',
+      ogDescription: 'Piattaforma di chatbot AI in white label: la addestri una volta sui Suoi contenuti e risponde ai clienti via testo o voce su sito, WhatsApp o link di chat.'
+    }
+  };
+  function setMeta(sel, val) { var el = document.querySelector(sel); if (el) el.setAttribute('content', val); }
+  function applyLang(lang) {
+    var m = META[lang];
+    document.title = m.title;
+    setMeta('meta[name="description"]', m.description);
+    setMeta('meta[property="og:title"]', m.ogTitle);
+    setMeta('meta[property="og:description"]', m.ogDescription);
+    setMeta('meta[name="twitter:title"]', m.ogTitle);
+    setMeta('meta[name="twitter:description"]', m.ogDescription);
+    setMeta('meta[property="og:locale"]', lang === 'it' ? 'it_IT' : 'en_US');
+    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+    document.querySelectorAll('option[data-t-en]').forEach(function (o) {
+      o.textContent = o.getAttribute('data-t-' + lang);
+    });
+    document.querySelectorAll('*').forEach(function (el) {
+      for (var i = 0; i < el.attributes.length; i++) {
+        var n = el.attributes[i].name;
+        if (n.indexOf('data-it-') !== 0) continue;
+        var attr = n.slice(8);
+        if (!el.hasAttribute('data-en-' + attr)) el.setAttribute('data-en-' + attr, el.getAttribute(attr) || '');
+        el.setAttribute(attr, el.getAttribute(lang === 'it' ? n : 'data-en-' + attr));
+      }
+    });
+  }
+  function setLang(lang) {
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.lang = lang;
+    applyLang(lang);
+  }
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('[data-set-lang]');
+    if (!btn) return;
+    e.preventDefault();
+    setLang(btn.getAttribute('data-set-lang'));
+  });
+  applyLang(document.documentElement.getAttribute('data-lang') || 'en');
+})();
 </script>
 
 <!-- Floating chat widget -->

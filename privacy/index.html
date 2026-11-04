@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<script>
+(function () {
+  var KEY = 'qyara-lang';
+  var lang = null;
+  var m = /[?&]lang=(it|en)\b/i.exec(location.search);
+  if (m) {
+    lang = m[1].toLowerCase();
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+  }
+  if (!lang) {
+    try { lang = localStorage.getItem(KEY); } catch (e) {}
+    if (lang !== 'it' && lang !== 'en') lang = null;
+  }
+  if (!lang) {
+    var prefs = navigator.languages || [navigator.language || ''];
+    for (var i = 0; i < prefs.length; i++) {
+      var p = String(prefs[i]).toLowerCase();
+      if (p === 'it' || p.indexOf('it-') === 0) { lang = 'it'; break; }
+    }
+  }
+  lang = lang || 'en';
+  document.documentElement.setAttribute('data-lang', lang);
+  document.documentElement.lang = lang;
+})();
+</script>
+<title>Privacy Notice — Qyara</title>
+<meta name="description" content="How Qyara processes personal data: controller, sources, purposes, legal basis, retention, transfers and your rights under the GDPR."/>
+<link rel="canonical" href="https://qyara.site/privacy/"/>
+<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+<meta name="theme-color" content="#1e5fff"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#04060f;--card:#111827;--blue:#1e5fff;--blue3:#60a5fa;--red2:#ff4757;--white:#f8faff;--gray:#94a3b8;--border:rgba(255,255,255,.08)}
+:root[data-lang="en"] [data-it]{display:none}
+:root[data-lang="it"] [data-en]{display:none}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--black);color:var(--white);line-height:1.7;-webkit-font-smoothing:antialiased}
+header{max-width:760px;margin:0 auto;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+header a.back{color:var(--white);text-decoration:none;font-weight:700;letter-spacing:-.01em}
+header a.back span{color:var(--red2)}
+.lang-switch{display:flex;align-items:center;gap:.25rem;font-size:.8125rem;color:var(--gray)}
+.lang-switch button{font:inherit;color:inherit;background:none;border:0;padding:.25rem .4rem;cursor:pointer;opacity:.55;border-radius:4px}
+.lang-switch button:hover{opacity:.85}
+.lang-switch button:focus-visible{outline:2px solid currentColor;outline-offset:1px}
+:root[data-lang="it"] .lang-switch [data-set-lang="it"],:root[data-lang="en"] .lang-switch [data-set-lang="en"]{opacity:1;font-weight:700;color:var(--white)}
+main{max-width:760px;margin:0 auto;padding:1rem 1.5rem 4rem}
+h1{font-size:clamp(1.8rem,5vw,2.4rem);line-height:1.15;margin-bottom:.4rem}
+.updated{color:var(--gray);font-size:.9rem;margin-bottom:2rem}
+h2{font-size:1.15rem;margin:2.2rem 0 .6rem;padding-top:1.2rem;border-top:1px solid var(--border);color:var(--white);scroll-margin-top:1rem}
+p{color:#cbd5e1;margin-bottom:.9rem}
+ul{margin:0 0 .9rem 1.25rem;color:#cbd5e1}
+li{margin-bottom:.3rem}
+a{color:var(--blue3)}
+address{font-style:normal;color:#cbd5e1;margin-bottom:.9rem}
+footer{max-width:760px;margin:0 auto;padding:0 1.5rem 3rem;color:var(--gray);font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="/">Qyara<span>.ai</span></a>
+  <div class="lang-switch" role="group" aria-label="Language / Lingua">
+    <button type="button" data-set-lang="it" lang="it">IT</button>
+    <span aria-hidden="true">·</span>
+    <button type="button" data-set-lang="en" lang="en">EN</button>
+  </div>
+</header>
+
+<main>
+<!-- ═══════════════ ITALIANO ═══════════════ -->
+<article data-it lang="it">
+  <h1>Informativa sulla privacy</h1>
+  <p class="updated">Ultimo aggiornamento: 4 novembre 2026</p>
+
+  <h2>Titolare del trattamento</h2>
+  <address>Qyara — Jai Shanker<br>3614 W Kennedy Blvd, Tampa, FL 33609, Stati Uniti<br><a href="mailto:hello@qyara.site">hello@qyara.site</a></address>
+  <p>Non abbiamo nominato un Responsabile della protezione dei dati: per la natura e il volume ridotto del trattamento non ne sussiste l'obbligo ai sensi dell'art. 37 GDPR.</p>
+
+  <h2>Perché ha ricevuto una nostra email</h2>
+  <p>Se Le abbiamo scritto senza che Lei ci avesse contattato in precedenza, il Suo indirizzo email era pubblicato sul sito web della Sua attività. Non acquistiamo elenchi di contatti, non utilizziamo dati provenienti da violazioni di sicurezza e non raccogliamo indirizzi da fonti non pubbliche.</p>
+
+  <h2>Dati personali che trattiamo</h2>
+  <ul>
+    <li>nome dell'attività, indirizzo, numero di telefono e sito web</li>
+    <li>l'indirizzo email pubblicato sul sito dell'attività</li>
+    <li>informazioni pubbliche presenti su Google Maps: categoria, valutazione, numero di recensioni</li>
+    <li>contenuto pubblico delle pagine del Suo sito, utilizzato per rendere il messaggio pertinente alla Sua attività</li>
+    <li>la data di invio della nostra email e, se presente, la Sua risposta</li>
+  </ul>
+  <p>Non trattiamo categorie particolari di dati personali (art. 9 GDPR) e non effettuiamo alcuna profilazione automatizzata che produca effetti giuridici nei Suoi confronti.</p>
+
+  <h2>Fonte dei dati</h2>
+  <p>Il sito web pubblico della Sua attività e la scheda pubblica della Sua attività su Google Maps.</p>
+
+  <h2>Finalità e base giuridica</h2>
+  <p><strong>Finalità:</strong> contattarLa, una sola volta, per presentarLe un servizio software B2B che riteniamo utile per la Sua attività.</p>
+  <p><strong>Base giuridica:</strong> legittimo interesse del titolare ai sensi dell'art. 6, par. 1, lett. f) GDPR, consistente nel promuovere la propria attività presso imprese operanti nel medesimo settore. Abbiamo valutato che tale interesse non prevalga sui Suoi diritti, trattandosi di un unico contatto, su un indirizzo aziendale pubblicato, con possibilità immediata di opposizione.</p>
+
+  <h2>Come opporsi — in qualsiasi momento, senza motivazione</h2>
+  <p>Risponda alla nostra email scrivendo "cancellami", oppure scriva a <a href="mailto:hello@qyara.site">hello@qyara.site</a>.</p>
+  <p>Rimuoveremo il Suo indirizzo entro 72 ore e non La ricontatteremo. Non deve fornire alcuna motivazione e l'opposizione è gratuita.</p>
+
+  <h2>Destinatari e trasferimenti verso Paesi terzi</h2>
+  <p>I dati sono trattati negli Stati Uniti. Ci avvaliamo dei seguenti fornitori, che agiscono come responsabili del trattamento:</p>
+  <ul>
+    <li>Zoho Corporation (Stati Uniti / India) — invio delle email</li>
+    <li>GitHub, Inc., società del gruppo Microsoft (Stati Uniti) — hosting del sito e automazione</li>
+    <li>Groq, Inc. (Stati Uniti) — elaborazione del contenuto pubblico del Suo sito per personalizzare il messaggio</li>
+    <li>Google LLC (Stati Uniti) — caratteri tipografici del sito (Google Fonts), per chi visita questo sito</li>
+  </ul>
+  <p>Il trasferimento avviene sulla base delle Clausole Contrattuali Standard approvate dalla Commissione europea oppure, ove il fornitore risulti certificato, del EU–U.S. Data Privacy Framework.</p>
+  <p>Non cediamo né vendiamo i Suoi dati a terzi per finalità di marketing.</p>
+
+  <h2>Periodo di conservazione</h2>
+  <p>Conserviamo i dati fino alla Sua eventuale opposizione e, in ogni caso, non oltre 24 mesi dall'ultimo contatto. In caso di opposizione conserviamo unicamente il Suo indirizzo email in un elenco di esclusione, al solo fine di non ricontattarLa.</p>
+
+  <h2>I Suoi diritti</h2>
+  <p>Ai sensi degli artt. 15-22 GDPR Lei ha diritto di chiedere l'accesso ai Suoi dati, la rettifica, la cancellazione, la limitazione del trattamento, la portabilità, e di opporsi al trattamento. Per esercitarli scriva a <a href="mailto:hello@qyara.site">hello@qyara.site</a>: risponderemo entro 30 giorni.</p>
+
+  <h2>Reclamo all'autorità di controllo</h2>
+  <p>Ha inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali, Piazza Venezia 11, 00187 Roma — <a href="https://www.garanteprivacy.it" rel="noopener">www.garanteprivacy.it</a></p>
+
+  <h2 id="cookies-it">Cookie e statistiche del sito</h2>
+  <p>Questo sito non imposta cookie propri e non utilizza cookie di profilazione né strumenti di analisi di terze parti. Nel Suo browser viene salvata soltanto la lingua scelta (IT/EN), come dato tecnico che non ci viene trasmesso.</p>
+  <p>Quando visita il sito, i caratteri tipografici sono caricati dai server di Google Fonts (Google LLC, Stati Uniti): ciò comporta la trasmissione a Google del Suo indirizzo IP e di dati tecnici del browser. La pagina può inoltre incorporare un widget di chat caricato da un server separato; se lo utilizza, i messaggi che scrive sono trattati per rispondere alla Sua richiesta.</p>
+</article>
+
+<!-- ═══════════════ ENGLISH ═══════════════ -->
+<article data-en lang="en">
+  <h1>Privacy Notice</h1>
+  <p class="updated">Last updated: 4 November 2026</p>
+
+  <h2>Data controller</h2>
+  <address>Qyara — Jai Shanker<br>3614 W Kennedy Blvd, Tampa, FL 33609, United States<br><a href="mailto:hello@qyara.site">hello@qyara.site</a></address>
+  <p>We have not appointed a Data Protection Officer; given the nature and small volume of the processing, Article 37 GDPR does not require one.</p>
+
+  <h2>Why you received an email from us</h2>
+  <p>If we wrote to you without you having contacted us first, your email address was published on your business's own website. We do not buy contact lists, we do not use data from breaches, and we do not collect addresses from non-public sources.</p>
+
+  <h2>Personal data we process</h2>
+  <ul>
+    <li>business name, address, phone number and website</li>
+    <li>the email address published on the business's website</li>
+    <li>public information from Google Maps: category, rating, review count</li>
+    <li>public content from your website's pages, used to make the message relevant to your business</li>
+    <li>the date we sent our email and your reply, if any</li>
+  </ul>
+  <p>We do not process special categories of personal data (Art. 9 GDPR) and we carry out no automated decision-making that produces legal effects for you.</p>
+
+  <h2>Source of the data</h2>
+  <p>Your business's public website, and your business's public Google Maps listing.</p>
+
+  <h2>Purpose and legal basis</h2>
+  <p><strong>Purpose:</strong> to contact you once, to introduce a B2B software service we believe is useful to your business.</p>
+  <p><strong>Legal basis:</strong> the controller's legitimate interest under Art. 6(1)(f) GDPR, in promoting its business to companies in the same sector. We assessed that this interest does not override your rights, given that it is a single contact, to a published business address, with an immediate means of objecting.</p>
+
+  <h2>How to object — at any time, no reason needed</h2>
+  <p>Reply to our email with the word "unsubscribe", or write to <a href="mailto:hello@qyara.site">hello@qyara.site</a>.</p>
+  <p>We will remove your address within 72 hours and will not contact you again. You do not have to give a reason, and objecting is free.</p>
+
+  <h2>Recipients and transfers outside the EU</h2>
+  <p>Data is processed in the United States. We use the following providers, acting as processors:</p>
+  <ul>
+    <li>Zoho Corporation (United States / India) — sending email</li>
+    <li>GitHub, Inc., a Microsoft company (United States) — site hosting and automation</li>
+    <li>Groq, Inc. (United States) — processing public content from your website to personalise the message</li>
+    <li>Google LLC (United States) — the site's typefaces (Google Fonts), for visitors to this website</li>
+  </ul>
+  <p>Transfers rely on the European Commission's Standard Contractual Clauses or, where the provider is certified, the EU–U.S. Data Privacy Framework.</p>
+  <p>We do not share or sell your data to third parties for marketing.</p>
+
+  <h2>Retention</h2>
+  <p>We keep the data until you object, and in any case no longer than 24 months from last contact. If you object, we retain only your email address on a suppression list, solely so that we do not contact you again.</p>
+
+  <h2>Your rights</h2>
+  <p>Under Arts. 15–22 GDPR you have the right to request access to your data, rectification, erasure, restriction of processing, portability, and to object to processing. To exercise them, write to <a href="mailto:hello@qyara.site">hello@qyara.site</a>; we will respond within 30 days.</p>
+
+  <h2>Complaints</h2>
+  <p>You also have the right to lodge a complaint with the Italian data protection authority: Garante per la protezione dei dati personali, Piazza Venezia 11, 00187 Rome — <a href="https://www.garanteprivacy.it" rel="noopener">www.garanteprivacy.it</a></p>
+
+  <h2 id="cookies-en">Cookies and site analytics</h2>
+  <p>This site sets no cookies of its own and uses no profiling cookies and no third-party analytics. The only thing stored in your browser is your language choice (IT/EN), a technical setting that is not sent to us.</p>
+  <p>When you visit, the site's typefaces are loaded from Google Fonts servers (Google LLC, United States), which means your IP address and browser details are sent to Google. The page may also embed a chat widget loaded from a separate server; if you use it, the messages you write are processed to answer your request.</p>
+</article>
+</main>
+
+<footer>
+  <a href="/">← Qyara</a>
+</footer>
+
+<script>
+(function () {
+  var KEY = 'qyara-lang';
+  var META = {
+    en: { title: 'Privacy Notice — Qyara', description: 'How Qyara processes personal data: controller, sources, purposes, legal basis, retention, transfers and your rights under the GDPR.' },
+    it: { title: 'Informativa sulla privacy — Qyara', description: 'Come Qyara tratta i dati personali: titolare, fonti, finalità, base giuridica, conservazione, trasferimenti e diritti previsti dal GDPR.' }
+  };
+  function applyLang(lang) {
+    document.title = META[lang].title;
+    var d = document.querySelector('meta[name="description"]');
+    if (d) d.setAttribute('content', META[lang].description);
+    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+  }
+  function setLang(lang) {
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.lang = lang;
+    applyLang(lang);
+  }
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('[data-set-lang]');
+    if (!btn) return;
+    e.preventDefault();
+    setLang(btn.getAttribute('data-set-lang'));
+  });
+  applyLang(document.documentElement.getAttribute('data-lang') || 'en');
+  // #cookies lands on whichever language block is visible
+  if (location.hash === '#cookies') {
+    var el = document.getElementById('cookies-' + document.documentElement.getAttribute('data-lang'));
+    if (el) el.scrollIntoView();
+  }
+})();
+</script>
+</body>
+</html>
